@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 0 !important;
   background-image: url("../public/wallpaper.webp");
   height: 100%;
   background-repeat: no-repeat;
@@ -13,6 +13,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.App {
+  padding-top: 1rem;
+}
+
 .container {
   display: flex;
   justify-content: center;
@@ -20,11 +24,18 @@ body {
 
 .row {
   width: 100%;
+  justify-content: center;
+  padding-top: 1rem;
 }
 
 .card {
   border-radius: 1rem !important;
 }
+
+.card-title {
+  text-align: center;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

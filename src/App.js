@@ -1,6 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, CardTitle, CardBody, CardText, Row, Container} from 'reactstrap';
+import {Card, CardTitle, CardBody, Row, Container} from 'reactstrap';
+import {Routes, Route, Link} from 'react-router-dom';
+import Landing from './Components/Landing';
+import StartAudit from './Components/StartAudit';
 
 function App() {
   return (
@@ -16,6 +19,10 @@ function App() {
             </Card>
         </Row>
       </Container>
+      <Routes>
+        <Route path='/' element={<Landing />} />
+        <Route path='/auditstart' element={<StartAudit />} />
+      </Routes>
     </div>
   );
 }
