@@ -5,6 +5,7 @@ import {Routes, Route, Link} from 'react-router-dom';
 import Landing from './Components/Landing';
 import StartAudit from './Components/StartAudit';
 
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +20,7 @@ function App() {
             </Card>
         </Row>
       </Container>
+      <Landing />
       <Routes>
         <Route path='/' element={<Landing />} />
         <Route path='/auditstart' element={<StartAudit />} />
