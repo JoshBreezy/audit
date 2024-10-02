@@ -1,0 +1,22 @@
+const checklist = ['exterior entrance area broom-swept and free of debris and litter',
+    'entry door kickplates and thresholds clean',
+    'entry door glass clean',
+    'entry mat clean (not soiled) and broom-swept',
+    'floors broom-swept and clean',
+    'baseboards clean and well-maintained',
+    'upholstered furniture in Waiting Area well-maintained',
+    'window ledges clean and free of debris',
+    'windows clean',
+    'perimeter walls clean and well-maintained',
+    'Greeters stand clean and well-organized',
+    'Greeters stand well-maintained',
+    'POS system and telephone clean and in good repair',
+    'menus clean and well-maintained',
+    'merchandise properly displayed',
+    'waste bin (interior and exterior )clean',
+    'high ceiling area clean and well-maintained (lighting fixtures, ductwork, etc.)',
+    'air-conditioning vents clean and dust free',
+    'lighting fixtures (including exit signs) fully operational – no burnt-out light bulbs',
+    'no evidence of pest activity (10 points)']
+
+export default checklist;
