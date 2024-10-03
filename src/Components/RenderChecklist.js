@@ -1,7 +1,6 @@
 import Checklist from '../Lists/Checklist';
 import { FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
-import Cam from './Cam';
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef } from 'react';
 import Webcam from "react-webcam";
 
 const videoConstraints = {
@@ -34,7 +33,7 @@ export default function RenderChecklist () {
         );
         setCheckedState(updatedCheckState);
         setScore(Checklist.length - updatedCheckState.filter(value => value).length);
-        toggleReq();
+        updatedCheckState[position] && toggleReq();
     }
 
     function handleCam () {
