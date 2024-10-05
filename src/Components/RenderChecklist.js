@@ -73,11 +73,11 @@ export default function RenderChecklist () {
             return (
                 <FormGroup check key={index} >
                     <Input type='checkbox' 
-                        id={index} 
+                        id={index.toString()}
                         name={index}
                         checked={checkedState[index]}
                         onChange={() => handleCheck(index)} />
-                        <Label check>
+                        <Label check for={index.toString()}>
                             {item}
                         </Label>
                 </FormGroup>

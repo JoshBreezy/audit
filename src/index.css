@@ -50,6 +50,15 @@ form {
   margin: .5rem;
 }
 
+.form-check-input:checked {
+  background-color: #dc3545 !important;
+  border-color: #000 !important;
+}
+
+.form-check-input:checked[type=checkbox] {
+  color: #000;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
