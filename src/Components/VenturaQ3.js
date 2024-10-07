@@ -14,29 +14,32 @@ export default function VenturaQ3 () {
         import.meta.url,
       ).toString();
 
-    const [page, setPage] = useState(1);
+    const [numPages, setNumPages] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const prevPage = () => {
-        const newPage = page - 1;
-        setPage(newPage);
-    };
-
-    const nextPage = () => {
-        const newPage = page + 1;
-        setPage(newPage);
-    };
+    function onDocumentLoadSuccess({ numPages }) {
+        setNumPages(numPages);
+        setLoading(false);
+      };
 
 
     return (
         <>
-            <Container className='pt-3' >
-                <Document file={oldAudit}  >
-                    <Page pageNumber={page} className='pdfPage' />
-                </Document>
+            <Container clssName='col-12'>
+                {loading && <h3>Document Loading</h3>}
             </Container>
-            <Container className='mt-1'>
-                <Button color='primary' onClick={prevPage} className='ms-3'>Prev</Button>
-                <Button color='primary' onClick={nextPage} className='ms-3'>Next</Button>
+            <Container className='pt-3' >
+                <Document file={oldAudit} onLoadSuccess={onDocumentLoadSuccess} >
+                    {Array.from(
+                        new Array(numPages),
+                            (el, index) => (
+                                <Page
+                                    key={`page_${index + 1}`}
+                                    pageNumber={index + 1}
+                                />
+                            ),
+                    )}
+                </Document>
             </Container>
         </>
     )

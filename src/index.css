@@ -56,7 +56,7 @@ form {
 }
 
 .form-check-input:checked[type=checkbox] {
-  color: #000;
+  --bs-form-check-bg-image: disable !important;
 }
 
 
