@@ -1,4 +1,3 @@
-import Checklist from '../Lists/Checklist';
 import { FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
 import { useState, useRef } from 'react';
 import Webcam from "react-webcam";
@@ -10,7 +9,7 @@ const videoConstraints = {
 
 
 
-export default function RenderChecklist () {
+export default function RenderChecklist ({props}) {
 
     const webcamRef = useRef(null);
 
@@ -19,10 +18,10 @@ export default function RenderChecklist () {
     const [modal, setModal] = useState(false);
     
     const [checkedState, setCheckedState] = useState(
-        new Array(Checklist.length).fill(false)
+        new Array(props.length).fill(false)
     );
 
-    const [score, setScore] = useState (Checklist.length);
+    const [score, setScore] = useState (props.length);
 
     const [camera, setCamera] = useState (false);
 
@@ -32,7 +31,7 @@ export default function RenderChecklist () {
             index === position ? !item : item
         );
         setCheckedState(updatedCheckState);
-        setScore(Checklist.length - updatedCheckState.filter(value => value).length);
+        setScore(props.length - updatedCheckState.filter(value => value).length);
         updatedCheckState[position] && toggleReq();
     }
 
@@ -69,7 +68,7 @@ export default function RenderChecklist () {
             />
             <Button color='primary' onClick={capture} >Capture</Button>
         </Modal>
-        {Checklist.map((item, index) => {
+        {props.map((item, index) => {
             return (
                 <FormGroup check key={index} >
                     <Input type='checkbox' 

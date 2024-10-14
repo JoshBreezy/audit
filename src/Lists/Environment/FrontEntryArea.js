@@ -1,4 +1,4 @@
-const checklist = ['exterior entrance area broom-swept and free of debris and litter',
+const frontEntryArea = ['exterior entrance area broom-swept and free of debris and litter',
     'entry door kickplates and thresholds clean',
     'entry door glass clean',
     'entry mat clean (not soiled) and broom-swept',
@@ -19,4 +19,4 @@ const checklist = ['exterior entrance area broom-swept and free of debris and li
     'lighting fixtures (including exit signs) fully operational – no burnt-out light bulbs',
     'no evidence of pest activity (10 points)']
 
-export default checklist;
+export default frontEntryArea;
