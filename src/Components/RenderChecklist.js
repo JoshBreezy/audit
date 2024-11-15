@@ -70,9 +70,9 @@ export default function RenderChecklist ({props}) {
         </Modal>
         {props.map((item, index) => {
             return (
-                <FormGroup check key={index} >
+                <FormGroup check key={item.value} >
                     <Input type='checkbox' 
-                        id={index.toString()}
+                        id={item.value}
                         name={index}
                         checked={checkedState[index]}
                         onChange={() => handleCheck(index)} />
