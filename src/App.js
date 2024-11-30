@@ -4,6 +4,7 @@ import {Card, CardTitle, CardBody, Row, Container, Modal, ModalBody, ModalFooter
 import {Routes, Route, Link} from 'react-router-dom';
 import Landing from './Components/Landing';
 import StartAudit from './Components/StartAudit';
+import Initiate from './Components/Initiate';
 import ViewPreviousAudit from './Components/ViewPreviousAudit';
 import VenturaQ3 from './Components/VenturaQ3';
 import { useState } from 'react';
@@ -64,7 +65,8 @@ function App() {
         </Row>
       </Container>
       <Routes>
-        <Route path='/audit' element={<Landing />} />
+        <Route path='/' element={<Landing />} />
+        <Route path='/initiate' element={<Initiate />} />
         <Route path='/auditstart' element={<StartAudit />} />
         <Route path='/viewprev' element={<ViewPreviousAudit />} />
         <Route path='/viewprev/VenturaQ3' element={<VenturaQ3 />} />
