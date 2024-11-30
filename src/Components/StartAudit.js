@@ -1,7 +1,7 @@
 import {Button, Form, Container, Row, Card, CardTitle, CardBody, CardText, FormGroup, Input, Label } from 'reactstrap';
 import RenderChecklist from './RenderChecklist';
-import frontEntryArea from '../Lists/Environment/FrontEntryArea';
-import diningArea from '../Lists/Environment/DiningArea';
+import frontEntryArea from '../Lists/Environment/FrontOfHouse/FrontEntryArea';
+import diningArea from '../Lists/Environment/FrontOfHouse/DiningArea';
 
 export default function StartAudit () {
     return (

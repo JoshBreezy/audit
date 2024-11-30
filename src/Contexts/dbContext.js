@@ -11,7 +11,25 @@ export function useDB() {
 export function DBProvider({ children }){
     const [auditId, setAuditId] = useState();
 
-    function auditInit(props) {
-        fetch()
+    async function auditInit(props) {
+        try{
+            const response = await fetch('/audits',{
+                method: 'post',
+                headers: {'Content-Type': 'Application/json'},
+                body: {props}
+            })
+            const json = await response.json();
+            setAuditId(json[0].id)
+        } catch (error) {
+            console.log(error)
+        }
     }
+    const value = {
+        auditInit
+    }
+    return(
+        <dbContext.Provider value={value}>
+            { children }
+        </dbContext.Provider>
+    )
 }

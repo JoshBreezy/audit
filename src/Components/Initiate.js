@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect,useContext } from 'react';
+import useDB from '../Contexts/dbContext';
 import { Container, Form, FormGroup, Label, Input, Card } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
+    const { auditInit } = useContext(useDB);
 
     useEffect(() => {
         const locals = async() => {

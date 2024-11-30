@@ -1,4 +1,7 @@
-const frontEntryArea = ['exterior entrance area broom-swept and free of debris and litter',
+const frontEntryArea = [
+    'exterior entry area free of grease build-up',
+    'exterior entrance area broom-swept and free of debris and litter',
+    'exterior menu board clean and well presentable',
     'entry door kickplates and thresholds clean',
     'entry door glass clean',
     'entry mat clean (not soiled) and broom-swept',
