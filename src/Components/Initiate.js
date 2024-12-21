@@ -1,18 +1,19 @@
-import { useState, useEffect,useContext } from 'react';
-import useDB from '../Contexts/dbContext';
-import { Container, Form, FormGroup, Label, Input, Card } from 'reactstrap';
+import { useState, useEffect } from 'react';
+import { useDB } from '../Contexts/dbContext';
+import { Container, Form, FormGroup, Label, Input, Card, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const { auditInit } = useContext(useDB);
+    const { auditInit } = useDB();
+    const [active, setActive] = useState();
+    const [startEnable, setStartEnable] = useState(true);
 
     useEffect(() => {
         const locals = async() => {
             try {
                 const response = await fetch('http://localhost:3000/locations');
                 const json = await response.json()
-                console.log(json[0].locations)
                 setLocations(json[0].locations);
             } catch (error) {
                 console.log(error)
@@ -21,22 +22,34 @@ export default function Initiate () {
         locals();
     },[])
 
-    const [active, setActive] = useState('Select Location')
-
     const handleChange = (e) => {
-        setActive(e.target.value);
+        setActive({location: e.target.value});
+        setStartEnable(false);
+    }
+
+    function handleStart() {
+        try {
+            const response = auditInit(active);
+            const json = response.json();
+            console.log(json);
+        } catch(error) {
+            console.log(error)
+        }
     }
 
     return (
         <Container className='mt-3'>
             {locations && 
-                <Card>
+                <Card className='p-3'>
                     <Form className='p-3'>
                         <FormGroup>
                             <Label for='location'>
                                 Select Location
                             </Label>
                             <Input id='location' name='location' type='select' onChange={handleChange}>
+                                <option key='100'>
+                                    Click for options
+                                </option>
                                 {locations.map((location, index) => {
                                     return(
                                         <option key={index}>
@@ -46,7 +59,8 @@ export default function Initiate () {
                                 })}
                             </Input>
                         </FormGroup>
-                    </Form> 
+                    </Form>
+                    <Button disabled={startEnable} className='btn btn-primary' onClick={handleStart} >Start Audit</Button>
                 </Card>
             }
         </Container>

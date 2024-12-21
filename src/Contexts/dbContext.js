@@ -13,7 +13,7 @@ export function DBProvider({ children }){
 
     async function auditInit(props) {
         try{
-            const response = await fetch('/audits',{
+            const response = await fetch(`${URL}/audits`,{
                 method: 'post',
                 headers: {'Content-Type': 'Application/json'},
                 body: {props}
