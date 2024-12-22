@@ -1,4 +1,4 @@
-import { FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Form, FormGroup, ModalHeader, Input, Label, Modal, ModalBody, ModalFooter, Button, Container } from 'reactstrap';
 import { useState, useRef } from 'react';
 import Webcam from "react-webcam";
 
@@ -17,22 +17,27 @@ export default function RenderChecklist ({props}) {
 
     const [modal, setModal] = useState(false);
     
-    const [checkedState, setCheckedState] = useState(
-        new Array(props.length).fill(false)
-    );
-
-    const [score, setScore] = useState (props.length);
+    const [checkedState, setCheckedState] = useState(props);
 
     const [camera, setCamera] = useState (false);
 
 
     const handleCheck = (position) => {
-        const updatedCheckState = checkedState.map((item, index) => 
-            index === position ? !item : item
+        const updatedCheck = checkedState.map((item, index) => 
+            position === index ? {...item, check: !item.check} : item
         );
-        setCheckedState(updatedCheckState);
-        setScore(props.length - updatedCheckState.filter(value => value).length);
-        updatedCheckState[position] && toggleReq();
+        console.log(updatedCheck);
+        setCheckedState(updatedCheck);
+        updatedCheck[position].check && toggleReq();
+
+    }
+
+    const removePrevDed = () => {
+        const last = checkedState[checkedState.length -1]
+        if (last.deduction) {
+            const updatedCheck = checkedState.splice(0, checkedState.length-1);
+            setCheckedState(updatedCheck);
+        }
     }
 
     function handleCam () {
@@ -47,6 +52,30 @@ export default function RenderChecklist ({props}) {
         setUrl(imageSrc);
         setCamera(false);
     }
+
+    const [dedOpen, setDedOpen] = useState(false);
+
+    const handleAddDed = () => {
+        setDedOpen(!dedOpen);
+    }
+
+    function submitDed () {
+        const newItem = {
+            text: dedText,
+            value: 1,
+            check: false,
+            deduction: true
+        }
+        checkedState.push(newItem);
+        setDedOpen(false);
+    }
+
+    const [dedText, setDedText] = useState();
+
+    const handleDedChange = (event) => {
+        setDedText(event.target.value);
+    }
+
 
     return (
         <>
@@ -68,21 +97,35 @@ export default function RenderChecklist ({props}) {
             />
             <Button color='primary' onClick={capture} >Capture</Button>
         </Modal>
-        {props.map((item, index) => {
+        <Modal isOpen={dedOpen} toggle={handleAddDed} centered>
+            <ModalBody>
+                <Form onSubmit={(event) => event.preventDefault()}>
+                    <FormGroup text key={checkedState.length+1}>
+                        <ModalHeader>Deduction Description</ModalHeader>
+                        <Input type='text' id={checkedState.length+1} onChange={handleDedChange} className='mt-3' placeholder='ex: area needs better organization' />
+                        <Container className='d-flex '>
+                            <Button color='primary' className='btn mt-3' onClick={submitDed}>Submit</Button>
+                            <Button color='danger' className='btn mt-3 ms-3' onClick={handleAddDed}>Cancel</Button>
+                        </Container>
+                    </FormGroup>
+                </Form>
+            </ModalBody>
+        </Modal>
+        {checkedState.map((item, index) => {
             return (
-                <FormGroup check key={item.value} >
+                <FormGroup check key={index} >
                     <Input type='checkbox' 
-                        id={item.value}
-                        name={index}
-                        checked={checkedState[index]}
+                        id={index}
+                        name={item.text}
                         onChange={() => handleCheck(index)} />
                         <Label check for={index.toString()}>
-                            {item}
+                            {item.text}
                         </Label>
                 </FormGroup>
             )
         })}
-        <h1>Score:{score}</h1>
+        <Button color='danger' className='btn mt-2' onClick={handleAddDed} >Additional Deduction</Button>
+        <Button color='danger' className='btn mt-2 ms-4' onClick={removePrevDed}>Undo Previous Additional Deduction</Button>
         </>
     )
 }

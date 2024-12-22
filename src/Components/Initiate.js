@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
-import { useDB } from '../Contexts/dbContext';
+import { useState, useEffect, useContext } from 'react';
+import { useDB, dbContext } from '../Contexts/dbContext';
 import { Container, Form, FormGroup, Label, Input, Card, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const { auditInit } = useDB();
+    const {auditID, setAuditID} = useDB();
     const [active, setActive] = useState();
     const [startEnable, setStartEnable] = useState(true);
 
@@ -27,12 +27,16 @@ export default function Initiate () {
         setStartEnable(false);
     }
 
-    function handleStart() {
-        try {
-            const response = auditInit(active);
-            const json = response.json();
-            console.log(json);
-        } catch(error) {
+    async function handleStart(props) {
+        try{
+            const response = await fetch(`${URL}/audits`,{
+                method: 'post',
+                headers: {'Content-Type': 'Application/json'},
+                body: {props}
+            })
+            const json = await response.json();
+            setAuditID(json[0].id)
+        } catch (error) {
             console.log(error)
         }
     }

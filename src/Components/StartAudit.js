@@ -16,7 +16,7 @@ export default function StartAudit () {
             <Container>
                 <Row>
                     <Card className='col-12'>
-                        <CardTitle><h5>Part 1: Front of house</h5></CardTitle>
+                        <CardTitle><h5>Part 1: Front of House</h5></CardTitle>
                         <CardBody>
                             <CardText>Front Entry Area</CardText>
                             <Form>
