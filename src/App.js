@@ -65,7 +65,7 @@ function App() {
         </Row>
       </Container>
       <Routes>
-        <Route path='/' element={<Landing />} />
+        <Route path='/audit' element={<Landing />} />
         <Route path='/initiate' element={<Initiate />} />
         <Route path='/auditstart' element={<StartAudit />} />
         <Route path='/viewprev' element={<ViewPreviousAudit />} />
