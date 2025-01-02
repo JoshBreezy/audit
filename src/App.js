@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Card, CardTitle, CardBody, Row, Container, Modal, ModalBody, ModalFooter, ModalHeader, Form, FormGroup, Label, Input, Button} from 'reactstrap';
 import {Routes, Route, Link} from 'react-router-dom';
 import Landing from './Components/Landing';
-import StartAudit from './Components/StartAudit';
+import RenderAudit from './Components/RenderAudit';
 import Initiate from './Components/Initiate';
 import ViewPreviousAudit from './Components/ViewPreviousAudit';
 import VenturaQ3 from './Components/VenturaQ3';
@@ -66,10 +66,10 @@ function App() {
       </Container>
       <Routes>
         <Route path='/audit' element={<Landing />} />
-        <Route path='/initiate' element={<Initiate />} />
-        <Route path='/auditstart' element={<StartAudit />} />
-        <Route path='/viewprev' element={<ViewPreviousAudit />} />
-        <Route path='/viewprev/VenturaQ3' element={<VenturaQ3 />} />
+        <Route path='/audit/initiate' element={<Initiate />} />
+        <Route path='/audit/auditstart' element={<RenderAudit />} />
+        <Route path='/audit/viewprev' element={<ViewPreviousAudit />} />
+        <Route path='/audit/viewprev/VenturaQ3' element={<VenturaQ3 />} />
       </Routes>
     </div>
   );

@@ -1,6 +1,8 @@
 import { Form, FormGroup, ModalHeader, Input, Label, Modal, ModalBody, ModalFooter, Button, Container } from 'reactstrap';
 import { useState, useRef } from 'react';
 import Webcam from "react-webcam";
+import { useDB } from '../Contexts/dbContext';
+import cloneDeep from 'lodash/cloneDeep';
 
 const videoConstraints = {
   width: 540,
@@ -9,7 +11,11 @@ const videoConstraints = {
 
 
 
-export default function RenderChecklist ({props}) {
+
+
+export default function RenderChecklist () {
+
+    const {section, part, subdivision, audit, setAudit} = useDB();
 
     const webcamRef = useRef(null);
 
@@ -17,26 +23,28 @@ export default function RenderChecklist ({props}) {
 
     const [modal, setModal] = useState(false);
     
-    const [checkedState, setCheckedState] = useState(props);
+    const [checkedState, setCheckedState] = useState(audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist);
 
     const [camera, setCamera] = useState (false);
 
 
     const handleCheck = (position) => {
-        const updatedCheck = checkedState.map((item, index) => 
+        const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) => 
             position === index ? {...item, check: !item.check} : item
         );
-        console.log(updatedCheck);
-        setCheckedState(updatedCheck);
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        setAudit(updatedAudit);
         updatedCheck[position].check && toggleReq();
 
     }
 
     const removePrevDed = () => {
-        const last = checkedState[checkedState.length -1]
+        const last = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist[checkedState.length]
         if (last.deduction) {
-            const updatedCheck = checkedState.splice(0, checkedState.length-1);
-            setCheckedState(updatedCheck);
+            const updatedAudit = cloneDeep(audit);
+            updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.pop();
+            setAudit(updatedAudit);
         }
     }
 
@@ -66,7 +74,9 @@ export default function RenderChecklist ({props}) {
             check: false,
             deduction: true
         }
-        checkedState.push(newItem);
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.push(newItem);
+        setAudit(updatedAudit);
         setDedOpen(false);
     }
 
@@ -111,7 +121,7 @@ export default function RenderChecklist ({props}) {
                 </Form>
             </ModalBody>
         </Modal>
-        {checkedState.map((item, index) => {
+        {audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) => {
             return (
                 <FormGroup check key={index} >
                     <Input type='checkbox' 

@@ -1,18 +1,19 @@
-import { useState, useEffect, useContext } from 'react';
-import { useDB, dbContext } from '../Contexts/dbContext';
+import { useState, useEffect } from 'react';
+import { useDB } from '../Contexts/dbContext';
 import { Container, Form, FormGroup, Label, Input, Card, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const {auditID, setAuditID} = useDB();
+    const {audit, setAudit, URL} = useDB();
     const [active, setActive] = useState();
     const [startEnable, setStartEnable] = useState(true);
+    const navigate= useNavigate();
 
     useEffect(() => {
         const locals = async() => {
             try {
-                const response = await fetch('http://localhost:3000/locations');
+                const response = await fetch(`${URL}/locations`);
                 const json = await response.json()
                 setLocations(json[0].locations);
             } catch (error) {
@@ -27,15 +28,18 @@ export default function Initiate () {
         setStartEnable(false);
     }
 
-    async function handleStart(props) {
+    async function handleStart() {
         try{
             const response = await fetch(`${URL}/audits`,{
-                method: 'post',
-                headers: {'Content-Type': 'Application/json'},
-                body: {props}
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify(active)
             })
             const json = await response.json();
-            setAuditID(json[0].id)
+            console.log(audit);
+            const updatedAudit = {...audit, _id: json._id, location: active.location};
+            setAudit(updatedAudit);
+            navigate('/audit/auditstart');
         } catch (error) {
             console.log(error)
         }
