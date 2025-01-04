@@ -123,10 +123,11 @@ export default function RenderChecklist () {
         </Modal>
         {audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) => {
             return (
-                <FormGroup check key={index} >
+                <FormGroup check key={item.text} >
                     <Input type='checkbox' 
-                        id={index}
+                        id={index.text}
                         name={item.text}
+                        checked={item.check}
                         onChange={() => handleCheck(index)} />
                         <Label check for={index.toString()}>
                             {item.text}

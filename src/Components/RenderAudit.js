@@ -1,7 +1,6 @@
 import {Button, Form, Container, Row, Card, CardTitle, CardBody, CardText, FormGroup, Input, Label } from 'reactstrap';
 import RenderChecklist from './RenderChecklist';
 import TableOfContents from './TableOfContents';
-import frontEntryArea from '../Lists/Environment/FrontOfHouse/FrontEntryArea';
 import { useDB } from '../Contexts/dbContext';
 import { useState } from 'react';
 

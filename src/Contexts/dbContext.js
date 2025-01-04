@@ -8,6 +8,7 @@ import GamesRoom from '../Lists/Environment/FrontOfHouse/GamesRoom';
 import MensRestroom from '../Lists/Environment/FrontOfHouse/MensRestroom';
 import PatioArea from '../Lists/Environment/FrontOfHouse/PatioArea';
 import WomensRestroom from '../Lists/Environment/FrontOfHouse/WomensRestroom';
+import Bar from '../Lists/Environment/Bar/Bar';
 
 const URL = 'http://localhost:3000';
 
@@ -41,7 +42,7 @@ export function DBProvider({ children }){
                                     score: null
                                 },
                                 {
-                                    name: "Bar(Exterior)",
+                                    name: "Bar (Exterior)",
                                     checklist: BarExterior,
                                     score: null
                                 },
@@ -79,7 +80,7 @@ export function DBProvider({ children }){
                             score: null
                         },
                         {
-                            name: "Part II: Environment Walkthrough",
+                            name: "Part II: Environment Walk-Through",
                             subdivisions: [
                                 {
                                     name: "",
@@ -91,7 +92,13 @@ export function DBProvider({ children }){
                         },
                         {
                             name: "Part III: Bar",
-                            subdivisions: [],
+                            subdivisions: [
+                                {
+                                    name: "Bar",
+                                    checklist: Bar,
+                                    score: null
+                                }
+                            ],
                             score: null
                         },
                         {
