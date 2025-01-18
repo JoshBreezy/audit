@@ -8,10 +8,12 @@ export default function TableOfContents(props) {
     const [partIOpen, setPartIOpen] = useState(false);
     const [partIIOpen, setPartIIOpen] = useState(false);
     const [partIIIOpen, setPartIIIOpen] = useState(false);
+    const [partIVOpen, setPartIVOpen] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
     const togglePartII = () => setPartIIOpen(!partIIOpen);
     const togglePartIII = () => setPartIIIOpen(!partIIIOpen);
+    const togglePartIV = () => setPartIVOpen(!partIVOpen);
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -27,6 +29,12 @@ export default function TableOfContents(props) {
 
     const handleEnvP3 = (e) => {
         setPart('Part III: Bar');
+        setSection('Environment');
+        setSubdivision(e.target.textContent);
+    }
+
+    const handleEnvP4 = (e) => {
+        setPart('Part IV: Kitchen');
         setSection('Environment');
         setSubdivision(e.target.textContent);
     }
@@ -69,8 +77,17 @@ export default function TableOfContents(props) {
                             <DropdownItem onClick={handleEnvP3}>Bar</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                    <li>Part III: Bar</li>
-                    <li>Part IV: Kitchen</li>
+                    <Dropdown isOpen={partIVOpen} toggle={togglePartIV}>
+                        <DropdownToggle caret>Part IV: Kitchen</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleEnvP4}>Exterior Back Area</DropdownItem>
+                            <DropdownItem onClick={handleEnvP4}>Office</DropdownItem>
+                            <DropdownItem onClick={handleEnvP4}>Prep Area</DropdownItem>
+                            <DropdownItem onClick={handleEnvP4}>Dry Storage</DropdownItem>
+                            <DropdownItem onClick={handleEnvP4}>Cooking Line</DropdownItem>
+                            <DropdownItem onClick={handleEnvP4}>Dish Area</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </ul>
                 <li>Quality Control</li>
                 <ul>

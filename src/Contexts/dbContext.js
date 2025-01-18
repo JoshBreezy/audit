@@ -9,6 +9,13 @@ import MensRestroom from '../Lists/Environment/FrontOfHouse/MensRestroom';
 import PatioArea from '../Lists/Environment/FrontOfHouse/PatioArea';
 import WomensRestroom from '../Lists/Environment/FrontOfHouse/WomensRestroom';
 import Bar from '../Lists/Environment/Bar/Bar';
+import CookingLine from '../Lists/Environment/Kitchen/CookingLine';
+import DishArea from '../Lists/Environment/Kitchen/DishArea';
+import DryStorage from '../Lists/Environment/Kitchen/DryStorage';
+import ExteriorBackArea from '../Lists/Environment/Kitchen/ExteriorBackArea';
+import Office from '../Lists/Environment/Kitchen/Office';
+import PrepArea from '../Lists/Environment/Kitchen/PrepArea';
+
 
 const URL = 'http://localhost:3000';
 
@@ -103,7 +110,38 @@ export function DBProvider({ children }){
                         },
                         {
                             name: "Part IV: Kitchen",
-                            subdivisions: [],
+                            subdivisions: [
+                                {
+                                    name: "Exterior Back Area",
+                                    checklist: ExteriorBackArea,
+                                    score: null
+                                },
+                                {
+                                    name: "Office",
+                                    checklist: Office,
+                                    score: null
+                                },
+                                {
+                                    name: "Prep Area",
+                                    checklist: PrepArea,
+                                    score: null
+                                },
+                                {
+                                    name: "Dry Storage",
+                                    checklist: DryStorage,
+                                    score: null
+                                },
+                                {
+                                    name: "Cooking Line",
+                                    checklist: CookingLine,
+                                    score: null
+                                },
+                                {
+                                    name: "Dish Area",
+                                    checklist: DishArea,
+                                    score: null
+                                }
+                            ],
                             score: null
                         }
                     ],

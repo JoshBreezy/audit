@@ -40,7 +40,8 @@ export default function RenderChecklist () {
     }
 
     const removePrevDed = () => {
-        const last = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist[checkedState.length]
+        const len = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.length;
+        const last = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist[len -1];
         if (last.deduction) {
             const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.pop();
