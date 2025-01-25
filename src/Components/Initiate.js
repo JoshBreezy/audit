@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const {audit, setAudit, URL} = useDB();
+    const {audit, setAudit, URL, token} = useDB();
     const [active, setActive] = useState();
     const [startEnable, setStartEnable] = useState(true);
     const navigate= useNavigate();
@@ -13,7 +13,9 @@ export default function Initiate () {
     useEffect(() => {
         const locals = async() => {
             try {
-                const response = await fetch(`${URL}/locations`);
+                const response = await fetch(`${URL}/locations`,
+                    {headers: {'Authorization': `Bearer ${token}`}}
+                );
                 const json = await response.json()
                 setLocations(json[0].locations);
             } catch (error) {
@@ -32,7 +34,7 @@ export default function Initiate () {
         try{
             const response = await fetch(`${URL}/audits`,{
                 method: 'POST',
-                headers: {'Content-Type' : 'application/json'},
+                headers: {'Content-Type' : 'application/json', 'Authorization': `Bearer ${token}`},
                 body: JSON.stringify(active)
             })
             const json = await response.json();

@@ -7,52 +7,15 @@ import RenderAudit from './Components/RenderAudit';
 import Initiate from './Components/Initiate';
 import ViewPreviousAudit from './Components/ViewPreviousAudit';
 import VenturaQ3 from './Components/VenturaQ3';
-import { useState } from 'react';
+import CreateUser from './Components/CreateUser';
+import Login from './Components/Login';
 
 
 function App() {
 
-  const [hasLogged, setHasLogged] = useState(false);
-  const toggleLogin = () => {
-    !hasLogged && setHasLogged(!hasLogged);
-  }
-
 
   return (
     <div className="App">
-      <Modal isOpen={!hasLogged} toggle={toggleLogin} >
-          <ModalHeader>
-            Please Login
-          </ModalHeader>
-          <ModalBody>
-            <Form>
-              <FormGroup>
-                <Label for='email'>
-                  Email
-                </Label>
-                <Input 
-                  id='email'
-                  name='email'
-                  type='email'
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for='password'>
-                  Password
-                </Label>
-                <Input 
-                  id='password'
-                  name='password'
-                  type='password'
-                />
-              </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter>
-            <Button color='primary' onClick={toggleLogin}>Submit</Button>
-            <Button color='danger' onClick={toggleLogin}>Cancel</Button>
-          </ModalFooter>
-        </Modal>
       <Container>
         <Row>
             <Card className='col-12'>
@@ -65,7 +28,9 @@ function App() {
         </Row>
       </Container>
       <Routes>
-        <Route path='/audit' element={<Landing />} />
+        <Route path='/audit' element={<Login />} />
+        <Route path='/audit/signup' element={<CreateUser />} />
+        <Route path='/audit/landing' element={<Landing />} />
         <Route path='/audit/initiate' element={<Initiate />} />
         <Route path='/audit/auditstart' element={<RenderAudit />} />
         <Route path='/audit/viewprev' element={<ViewPreviousAudit />} />

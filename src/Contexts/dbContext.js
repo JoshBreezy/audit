@@ -27,6 +27,15 @@ export function useDB() {
 
 export function DBProvider({ children }){
 
+    const [token, setToken_] = useState(localStorage.getItem('token') || null);
+
+    function setToken(newToken) {
+        setToken_(newToken);
+        localStorage.setItem('token', newToken);
+    }
+
+ //   const setToken = (newToken) => setToken_(localStorage.setItem('token', newToken));
+
     const[audit, setAudit] = useState(
         {
             _id: null,
@@ -240,11 +249,12 @@ export function DBProvider({ children }){
     const [subdivision, setSubdivision] = useState('Front Entry Area');
 
 
-
     const value = {
         URL,
         audit,
         setAudit,
+        token,
+        setToken,
         section,
         setSection,
         part,

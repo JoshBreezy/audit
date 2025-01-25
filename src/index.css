@@ -31,6 +31,10 @@ form {
   margin-bottom: 1rem;
 }
 
+.ml-2 {
+  margin-left: .5rem !important;
+}
+
 .contents {
   position: sticky !important;
   padding-top: 1rem;
