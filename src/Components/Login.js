@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
-    const { URL, token, setToken } = useDB();
+    const { URL, token, setToken, setUser } = useDB();
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
@@ -36,6 +36,7 @@ export default function Login() {
             const json = await response.json();
             setResponse(json);
             setToken(json.token);
+            setUser(json.user);
             setLoading(false);
             navigate('/audit/landing');
         } catch (error) {

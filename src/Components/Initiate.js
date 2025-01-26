@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const {audit, setAudit, URL, token} = useDB();
+    const {audit, setAudit, URL, token, user} = useDB();
     const [active, setActive] = useState();
     const [startEnable, setStartEnable] = useState(true);
     const navigate= useNavigate();
@@ -35,7 +35,10 @@ export default function Initiate () {
             const response = await fetch(`${URL}/audits`,{
                 method: 'POST',
                 headers: {'Content-Type' : 'application/json', 'Authorization': `Bearer ${token}`},
-                body: JSON.stringify(active)
+                body: JSON.stringify({
+                    location: active.location,
+                    author: user._id
+                })
             })
             const json = await response.json();
             console.log(audit);

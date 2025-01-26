@@ -34,7 +34,12 @@ export function DBProvider({ children }){
         localStorage.setItem('token', newToken);
     }
 
- //   const setToken = (newToken) => setToken_(localStorage.setItem('token', newToken));
+    const [user, setUser_] = useState(null);
+
+    function setUser(newUser) {
+        setUser_(newUser);
+        localStorage.setItem('user', newUser);
+    }
 
     const[audit, setAudit] = useState(
         {
@@ -260,7 +265,9 @@ export function DBProvider({ children }){
         part,
         setPart,
         subdivision,
-        setSubdivision
+        setSubdivision,
+        user,
+        setUser
 
     }
     return(
