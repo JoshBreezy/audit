@@ -41,6 +41,7 @@ export default function Login() {
             navigate('/audit/landing');
         } catch (error) {
             setError(error);
+            console.log(error);
             setLoading(false);
         }
     }

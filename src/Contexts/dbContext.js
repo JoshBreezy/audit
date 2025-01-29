@@ -17,7 +17,7 @@ import Office from '../Lists/Environment/Kitchen/Office';
 import PrepArea from '../Lists/Environment/Kitchen/PrepArea';
 
 
-const URL = 'http://localhost:3000';
+const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
 
 const dbContext = createContext();
 
