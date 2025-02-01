@@ -42,9 +42,9 @@ export default function Initiate () {
             })
             const json = await response.json();
             console.log(audit);
-            const updatedAudit = {...audit, _id: json._id, location: active.location};
+            const updatedAudit = {...audit, _id: json._id, location: active.location, author: user._id};
             setAudit(updatedAudit);
-            navigate('/audit/auditstart');
+            navigate('/auditstart');
         } catch (error) {
             console.log(error)
         }

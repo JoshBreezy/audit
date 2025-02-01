@@ -45,6 +45,7 @@ export function DBProvider({ children }){
         {
             _id: null,
             location: null,
+            author: null,
             sections: [
                 {
                     name: "Environment",
@@ -253,6 +254,19 @@ export function DBProvider({ children }){
     const [part, setPart] = useState('Part I: Front of House');
     const [subdivision, setSubdivision] = useState('Front Entry Area');
 
+    async function updateAudit(updatedAudit) {
+        try {
+            const response = await fetch(`${URL}/audits/${updatedAudit._id}`, {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(audit)
+            });
+            const json = await response.json();
+            console.log(json);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const value = {
         URL,
@@ -267,8 +281,8 @@ export function DBProvider({ children }){
         subdivision,
         setSubdivision,
         user,
-        setUser
-
+        setUser,
+        updateAudit
     }
     return(
         <dbContext.Provider value={value}>

@@ -1,7 +1,7 @@
 import { Card, CardHeader, CardBody, Form, FormGroup, Label, Input, Container, Button, Alert } from 'reactstrap';
 import { useState } from 'react';
 import { useDB } from '../Contexts/dbContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 export default function CreateUser() {
@@ -50,18 +50,18 @@ export default function CreateUser() {
     }
     return (
         <Container>
-            <Card className='mt-3 col-5'>
+            <Card className='mt-3 col-7'>
                 <CardHeader>Please Register</CardHeader>
                 <CardBody>
                     <Form>
                         <FormGroup>
                             <Label for='email'>
-                                Email
+                                User Name
                             </Label>
                             <Input
                                 type="text"
-                                name="email"
-                                placeholder="Email Address"
+                                name="username"
+                                placeholder="User Name"
                                 onChange={handleForm}
                             />
                         </FormGroup>
@@ -84,7 +84,7 @@ export default function CreateUser() {
                         </FormGroup>
                     </Form>
                     <Button type='submit' onClick={handleSubmit} disabled={loading} color='primary'>Submit</Button>
-                    <Button className='ml-2' color='primary' href='/audit'>Login</Button>
+                    <Link className='btn btn-primary ml-2' to='/audit'>Already have an account?</Link>
                     {error && <Alert className='mt-3' color='danger'>{error.message}</Alert>}
                 </CardBody>
             </Card>

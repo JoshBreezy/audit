@@ -1,12 +1,36 @@
-import {Button, Form, Container, Row, Card, CardTitle, CardBody, CardText, FormGroup, Input, Label } from 'reactstrap';
+import { Form, Container, Row, Card, CardTitle, CardBody, CardText } from 'reactstrap';
 import RenderChecklist from './RenderChecklist';
 import TableOfContents from './TableOfContents';
 import { useDB } from '../Contexts/dbContext';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { update } from 'lodash';
 
 export default function RenderAudit () {
 
-    const {section, part, subdivision, audit} = useDB();
+    const {section, part, subdivision, audit, updateAudit} = useDB();
+
+/*    useEffect(() => {
+        async function updateDB(audit) {
+            try {
+                const response = await fetch(`${URL}/audits:${audit._id}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(audit)
+                });
+                const json = await response.json();
+                console.log(json);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        updateDB(audit);
+    }, [audit]);
+
+*/
+    useEffect(() => {
+        updateAudit(audit);
+    }, [audit, updateAudit]);
+
 
     return (
         <>

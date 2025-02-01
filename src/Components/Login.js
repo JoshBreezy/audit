@@ -1,12 +1,12 @@
 import { Card, CardHeader, CardBody, Form, FormGroup, Label, Input, Container, Button, Alert } from 'reactstrap';
 import { useState } from 'react';
 import { useDB } from '../Contexts/dbContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 export default function Login() {
 
-    const { URL, token, setToken, setUser } = useDB();
+    const { URL, setToken, setUser } = useDB();
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
@@ -38,7 +38,7 @@ export default function Login() {
             setToken(json.token);
             setUser(json.user);
             setLoading(false);
-            navigate('/audit/landing');
+            navigate('/landing');
         } catch (error) {
             setError(error);
             console.log(error);
@@ -47,7 +47,7 @@ export default function Login() {
     }
     return (
         <Container>
-            <Card className='mt-3 col-5'>
+            <Card className='mt-3 col-7'>
                 <CardHeader>Please Login</CardHeader>
                 <CardBody>
                     <Form>
@@ -75,7 +75,7 @@ export default function Login() {
                         </FormGroup>
                     </Form>
                     <Button type='submit' onClick={handleSubmit} disabled={loading} color='primary'>Submit</Button>
-                    <Button color='link' href='/audit/signup'>Register</Button>
+                    <Link className='btn btn-primary ml-2' to='/audit/signup'>Register</Link>
                 </CardBody>
                 {error && <Alert color='danger'>{error.message}</Alert>}
             </Card>

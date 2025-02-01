@@ -13,12 +13,12 @@ export default function Landing () {
       <>
         <Container>
           <Row className='pt-4'>
-            {user.admin && <div className='col-11 d-flex justify-content-center'><Link to='/audit/initiate' className='btn btn-primary btn-lg'>Start New Audit</Link></div>}
+            {user.admin && <div className='col-11 d-flex justify-content-center'><Link to='/initiate' className='btn btn-primary btn-lg'>Start New Audit</Link></div>}
           </Row>
         </Container>
         <Container>
           <Row className='pt-4'>
-            <div className='col-11 d-flex justify-content-center'><Link to='/audit/viewprev' className='btn btn-primary btn-lg'>View Previous Audits</Link></div>
+            <div className='col-11 d-flex justify-content-center'><Link to='/viewprev' className='btn btn-primary btn-lg'>View Previous Audits</Link></div>
           </Row>
         </Container>
       </>

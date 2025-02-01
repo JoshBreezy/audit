@@ -30,7 +30,7 @@ const bar = [
         value: 1
     },
     {
-        text: "floor under bar equipment and stainless counters thoroughly clean and sani>zed",
+        text: "floor under bar equipment and stainless counters thoroughly clean and sanitized",
         check: false,
         value: 1
     },
