@@ -27,16 +27,43 @@ export default function RenderChecklist () {
 
     const [camera, setCamera] = useState (false);
 
+    const [waiting, setWaiting] = useState(false);
 
-    const handleCheck = (position) => {
+    function capture () {
+        const imageSrc = webcamRef.current.getScreenshot();
+        setUrl(imageSrc);
+        setCamera(false);
+        console.log(url);
+    }
+
+    const waitForInput = () => {
+        setWaiting(true);
+        return new Promise((resolve) => {
+          const checkInput = () => {
+            if (url) {
+              resolve(url);
+              setWaiting(false);
+            } else {
+              setTimeout(checkInput, 100);
+            }
+          };
+          checkInput();
+        });
+      };
+
+
+    async function handleCheck (position) {
         const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) => 
             position === index ? {...item, check: !item.check} : item
         );
-        const updatedAudit = cloneDeep(audit);
-        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
-        setAudit(updatedAudit);
         updatedCheck[position].check && toggleReq();
-
+        camera && await waitForInput();
+        const updatedPhoto = updatedCheck.map((item, index) => 
+            position === index ? {...item, photo: url} : item
+        );
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedPhoto;
+        setAudit(updatedAudit);
     }
 
     const removePrevDed = () => {
@@ -55,12 +82,6 @@ export default function RenderChecklist () {
     }
 
     const toggleReq = () => setModal(!modal);
-
-    function capture () {
-        const imageSrc = webcamRef.current.getScreenshot();
-        setUrl(imageSrc);
-        setCamera(false);
-    }
 
     const [dedOpen, setDedOpen] = useState(false);
 

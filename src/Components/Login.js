@@ -75,7 +75,7 @@ export default function Login() {
                         </FormGroup>
                     </Form>
                     <Button type='submit' onClick={handleSubmit} disabled={loading} color='primary'>Submit</Button>
-                    <Link className='btn btn-primary ml-2' to='/audit/signup'>Register</Link>
+                    <Link className='btn btn-primary ml-2' to='/signup'>Register</Link>
                 </CardBody>
                 {error && <Alert color='danger'>{error.message}</Alert>}
             </Card>
