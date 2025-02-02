@@ -13,7 +13,7 @@ export default function CreateUser() {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [formState, setFormState] = useState({
-        email: "",
+        username: "",
         password: "",
         passwordConfirm: "",
     });
@@ -33,12 +33,12 @@ export default function CreateUser() {
                 const response = await fetch(`${URL}/users/signup`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({"username": formState.email, "password": formState.password })
+                    body: JSON.stringify({"username": formState.username, "password": formState.password })
                 });
                 const json = await response.json();
                 setResponse(json);
                 setLoading(false);
-                navigate('/audit');
+                navigate('/');
             } else {
                 setError({message: "Passwords do not match"});
                 setLoading(false);
@@ -55,7 +55,7 @@ export default function CreateUser() {
                 <CardBody>
                     <Form>
                         <FormGroup>
-                            <Label for='email'>
+                            <Label for='username'>
                                 User Name
                             </Label>
                             <Input

@@ -11,7 +11,7 @@ export default function Login() {
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [formState, setFormState] = useState({
-        email: "",
+        username: "",
         password: "" 
     });
 
@@ -31,7 +31,7 @@ export default function Login() {
             const response = await fetch(`${URL}/users/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({"username": formState.email, "password": formState.password })
+                body: JSON.stringify({"username": formState.username, "password": formState.password })
             });
             const json = await response.json();
             setResponse(json);
@@ -52,13 +52,13 @@ export default function Login() {
                 <CardBody>
                     <Form>
                         <FormGroup>
-                            <Label for='email'>
-                                Email
+                            <Label for='username'>
+                                Username
                             </Label>
                             <Input
                                 type="text"
-                                name="email"
-                                placeholder="Email Address"
+                                name="username"
+                                placeholder="Username"
                                 onChange={handleForm}
                             />
                         </FormGroup>
