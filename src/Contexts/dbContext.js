@@ -15,6 +15,10 @@ import DryStorage from '../Lists/Environment/Kitchen/DryStorage';
 import ExteriorBackArea from '../Lists/Environment/Kitchen/ExteriorBackArea';
 import Office from '../Lists/Environment/Kitchen/Office';
 import PrepArea from '../Lists/Environment/Kitchen/PrepArea';
+import Walkthrough from '../Lists/Environment/WalkThrough/Walkthrough';
+import ClosingChecklist from '../Lists/Operations/Bar/ClosingChecklist';
+import OpeningChecklist from '../Lists/Operations/Bar/OpeningChecklist';
+import QualityControl from '../Lists/Operations/Bar/QualityControl';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
@@ -105,8 +109,8 @@ export function DBProvider({ children }){
                             name: "Part II: Environment Walk-Through",
                             subdivisions: [
                                 {
-                                    name: "",
-                                    checklist: [],
+                                    name: "Walk-Through",
+                                    checklist: Walkthrough,
                                     score: null
                                 }
                             ],
@@ -234,8 +238,24 @@ export function DBProvider({ children }){
                     name: "Operations",
                     parts: [
                         {
-                            name: "Part I: Bar",
-                            subdivisions: [],
+                            name: "Bar",
+                            subdivisions: [
+                                {
+                                    name: "Closing Checklist",
+                                    checklist: ClosingChecklist,
+                                    score: null
+                                },
+                                {
+                                    name: "Opening Checklist",
+                                    checklist: OpeningChecklist,
+                                    score: null
+                                },
+                                {
+                                    name: 'Quality Control',
+                                    checklist: QualityControl,
+                                    score: null
+                                }
+                            ],
                             score: null
                         },
                         {

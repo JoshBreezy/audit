@@ -27,42 +27,31 @@ export default function RenderChecklist () {
 
     const [camera, setCamera] = useState (false);
 
-    const [waiting, setWaiting] = useState(false);
+    const [position, setPosition] = useState();
+
 
     function capture () {
         const imageSrc = webcamRef.current.getScreenshot();
         setUrl(imageSrc);
+        const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) =>
+            position === index ? {...item, photo: imageSrc} : item
+        );
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        setAudit(updatedAudit);
         setCamera(false);
         console.log(url);
     }
 
-    const waitForInput = () => {
-        setWaiting(true);
-        return new Promise((resolve) => {
-          const checkInput = () => {
-            if (url) {
-              resolve(url);
-              setWaiting(false);
-            } else {
-              setTimeout(checkInput, 100);
-            }
-          };
-          checkInput();
-        });
-      };
 
-
-    async function handleCheck (position) {
+    function handleCheck (position) {
         const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) => 
             position === index ? {...item, check: !item.check} : item
         );
+        setPosition(position);
         updatedCheck[position].check && toggleReq();
-        camera && await waitForInput();
-        const updatedPhoto = updatedCheck.map((item, index) => 
-            position === index ? {...item, photo: url} : item
-        );
         const updatedAudit = cloneDeep(audit);
-        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedPhoto;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
         setAudit(updatedAudit);
     }
 
@@ -144,18 +133,49 @@ export default function RenderChecklist () {
             </ModalBody>
         </Modal>
         {audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, index) => {
-            return (
-                <FormGroup check key={item.text} >
-                    <Input type='checkbox' 
-                        id={index.text}
-                        name={item.text}
-                        checked={item.check}
-                        onChange={() => handleCheck(index)} />
-                        <Label check for={index.toString()}>
-                            {item.text}
-                        </Label>
-                </FormGroup>
-            )
+            if (item.subtext) {
+                return (
+                    <>
+                            <p>Management</p>
+                            <ul>
+                                <li>{item.subtext.Managers.bullet}</li>
+                            </ul>
+                            <p>Team Members</p>
+                            <ul>
+                                <li>{item.subtext.Team[0].bullet}</li>
+                                <ul>
+                                    {item.subtext.Team[0].subBullet.map((item) => {
+                                        return (
+                                            <li>{item}</li>
+                                        )
+                                    })}
+                                </ul>
+                                <li>{item.subtext.Team[1].bullet}</li>
+                                <ul>
+                                    {item.subtext.Team[1].subBullet.map((item) => {
+                                        return (
+                                            <li>{item}</li>
+                                        )
+                                    })}
+                                </ul>
+                            </ul>
+                    </>
+                )
+            }
+            if (item.text) {
+                return (
+                    <FormGroup check key={item.text} >
+                        <Input type='checkbox' 
+                            id={index.text}
+                            name={item.text}
+                            checked={item.check}
+                            onChange={() => handleCheck(index)} />
+                            <Label check for={index.toString()}>
+                                {item.text}
+                            </Label>
+                    </FormGroup>
+                )
+            }
         })}
         <Button color='danger' className='btn mt-2' onClick={handleAddDed} >Additional Deduction</Button>
         <Button color='danger' className='btn mt-2 ms-4' onClick={removePrevDed}>Undo Previous Additional Deduction</Button>

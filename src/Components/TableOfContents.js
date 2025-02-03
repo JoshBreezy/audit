@@ -9,11 +9,13 @@ export default function TableOfContents(props) {
     const [partIIOpen, setPartIIOpen] = useState(false);
     const [partIIIOpen, setPartIIIOpen] = useState(false);
     const [partIVOpen, setPartIVOpen] = useState(false);
+    const [opOpen, setOpOpen] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
     const togglePartII = () => setPartIIOpen(!partIIOpen);
     const togglePartIII = () => setPartIIIOpen(!partIIIOpen);
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
+    const toggleOp = () => setOpOpen(!opOpen);
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -45,13 +47,19 @@ export default function TableOfContents(props) {
         setSection('Quality Control');
     }
 
+    const handleOpBar = (e) => {
+        setPart('Bar');
+        setSection('Operations');
+        setSubdivision(e.target.textContent);
+    }
+
     return(
         <div className='contents col-3 card'>
             <ul>
                 <li>Environment</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={partIOpen} toggle={togglePartI}>
-                        <DropdownToggle caret>Part I: Front of House</DropdownToggle>
+                        <DropdownToggle className='col-12' caret>Front of House</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleEnvP1}>Front Entry Area</DropdownItem>
                             <DropdownItem onClick={handleEnvP1}>Dining Area</DropdownItem>
@@ -65,20 +73,19 @@ export default function TableOfContents(props) {
                         </DropdownMenu>
                     </Dropdown>
                     <Dropdown isOpen={partIIOpen} toggle={togglePartII}>
-                        <DropdownToggle caret>Part II: Environment Walk-Through</DropdownToggle>
+                        <DropdownToggle className='col-12' caret>Environment Walk-Through</DropdownToggle>
                         <DropdownMenu>
-                            <DropdownItem onClick={handleEnvP2}>Management</DropdownItem>
-                            <DropdownItem onClick={handleEnvP2}>Team Members</DropdownItem>
+                            <DropdownItem onClick={handleEnvP2}>Walk-Through</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     <Dropdown isOpen={partIIIOpen} toggle={togglePartIII}>
-                        <DropdownToggle caret>Part III: Bar</DropdownToggle>
+                        <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleEnvP3}>Bar</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     <Dropdown isOpen={partIVOpen} toggle={togglePartIV}>
-                        <DropdownToggle caret>Part IV: Kitchen</DropdownToggle>
+                        <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleEnvP4}>Exterior Back Area</DropdownItem>
                             <DropdownItem onClick={handleEnvP4}>Office</DropdownItem>
@@ -109,8 +116,15 @@ export default function TableOfContents(props) {
                     <li>Part III: Kitchen</li>
                 </ul>
                 <li>Operations</li>
-                <ul>
-                    <li>Part I: Bar</li>
+                    <ul className='p-0'>
+                        <Dropdown isOpen={opOpen} toggle={toggleOp}>
+                            <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem onClick={handleOpBar}>Closing Checklist</DropdownItem>
+                                <DropdownItem onClick={handleOpBar}>Opening Checklist</DropdownItem>
+                                <DropdownItem onClick={handleOpBar}>Quality Control</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     <li>Part II: Kitchen</li>
                 </ul>
             </ul>
