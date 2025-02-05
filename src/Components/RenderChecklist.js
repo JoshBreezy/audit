@@ -208,6 +208,30 @@ export default function RenderChecklist () {
                     </FormGroup>
                 )
             }
+            if (item.tdText) {
+                return (
+                    <>
+                        <ul>
+                            {item.tdText.map((item) => {
+                                return (
+                                    <li>{item}</li>
+                                )
+                            })}
+                        </ul>
+                    </>
+                )
+            }
+            if (item.scaleText) {
+                return (
+                    <FormGroup key={item.scaleText}>
+                        <Label for={item.scaleText}>
+                            {item.scaleText}
+                        </Label>
+                        <Input type='text' id={item.scaleText} name={item.scaleText} value={item.value} />
+                        <p className='mt-2'>10 points per Team Member - training must be fully complete, reviewed, and acceptably graded for a pass to achieve full points – no partial scoring</p>
+                    </FormGroup>
+                )
+            }
         })}
         <Button color='danger' className='btn mt-2' onClick={handleAddDed} >Additional Deduction</Button>
         <Button color='danger' className='btn mt-2 ms-4' onClick={removePrevDed}>Undo Previous Additional Deduction</Button>

@@ -1,7 +1,6 @@
 import { useDB } from '../Contexts/dbContext';
 import { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
-import appearance from './../Lists/Operations/Bar/Appearance';
 
 export default function TableOfContents(props) {
 
@@ -12,6 +11,8 @@ export default function TableOfContents(props) {
     const [partIVOpen, setPartIVOpen] = useState(false);
     const [opOpen, setOpOpen] = useState(false);
     const [opOpenII, setOpOpenII] = useState(false);
+    const [TTDOpen, setTTDOpen] = useState(false);
+    const [TTD2Open, setTTD2Open] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
     const togglePartII = () => setPartIIOpen(!partIIOpen);
@@ -19,6 +20,8 @@ export default function TableOfContents(props) {
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
     const toggleOp = () => setOpOpen(!opOpen);
     const toggleOpII = () => setOpOpenII(!opOpenII);
+    const toggleTTD = () => setTTDOpen(!TTDOpen);
+    const toggleTTD2 = () => setTTD2Open(!TTD2Open);
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -59,6 +62,18 @@ export default function TableOfContents(props) {
     const handleOpKitch = (e) => {
         setPart('Kitchen');
         setSection('Operations');
+        setSubdivision(e.target.textContent);
+    }
+
+    const handleTD = (e) => {
+        setPart('Front of House');
+        setSection('Team Training & Development');
+        setSubdivision(e.target.textContent);
+    }
+
+    const handleTD2 = (e) => {
+        setPart('Bar');
+        setSection('Team Training & Development');
         setSubdivision(e.target.textContent);
     }
 
@@ -119,10 +134,19 @@ export default function TableOfContents(props) {
                     <li>Ambience, Team Service & Appearance</li>
                 </ul>
                 <li>Team Training & Development</li>
-                <ul>
-                    <li>Part I: Front of House</li>
-                    <li>Part II: Bar</li>
-                    <li>Part III: Kitchen</li>
+                <ul className='p-0'>
+                    <Dropdown isOpen={TTDOpen} toggle={toggleTTD}>
+                        <DropdownToggle className='col-12' caret>Front of House</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleTD}>Front of House</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                    <Dropdown isOpen={TTD2Open} toggle={toggleTTD2}>
+                        <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleTD2}>Bar</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </ul>
                 <li>Operations</li>
                 <ul className='p-0'>

@@ -22,6 +22,8 @@ import QualityControl from '../Lists/Operations/Bar/QualityControl';
 import Inventory from '../Lists/Operations/Bar/Inventory';
 import Appearance from '../Lists/Operations/Bar/Appearance';
 import Kitchen from '../Lists/Operations/Kitchen/Kitchen';
+import FrontOfHouse from '../Lists/TeamT&D/FrontOfHouse';
+import BarTD from '../Lists/TeamT&D/BarTD';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
@@ -220,13 +222,25 @@ export function DBProvider({ children }){
                     name: "Team Training & Development",
                     parts: [
                         {
-                            name: "Part I: Front of House",
-                            subdivisions: [],
+                            name: "Front of House",
+                            subdivisions: [
+                                {
+                                    name: "Front of House",
+                                    checklist: FrontOfHouse,
+                                    score: null
+                                }
+                            ],
                             score: null
                         },
                         {
-                            name: "Part II: Bar",
-                            subdivisions: [],
+                            name: "Bar",
+                            subdivisions: [
+                                {
+                                    name: "Bar",
+                                    checklist: BarTD,
+                                    score: null
+                                }
+                            ],
                             score: null
                         },
                         {
