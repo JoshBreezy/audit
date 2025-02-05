@@ -19,6 +19,9 @@ import Walkthrough from '../Lists/Environment/WalkThrough/Walkthrough';
 import ClosingChecklist from '../Lists/Operations/Bar/ClosingChecklist';
 import OpeningChecklist from '../Lists/Operations/Bar/OpeningChecklist';
 import QualityControl from '../Lists/Operations/Bar/QualityControl';
+import Inventory from '../Lists/Operations/Bar/Inventory';
+import Appearance from '../Lists/Operations/Bar/Appearance';
+import Kitchen from '../Lists/Operations/Kitchen/Kitchen';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
@@ -254,13 +257,29 @@ export function DBProvider({ children }){
                                     name: 'Quality Control',
                                     checklist: QualityControl,
                                     score: null
+                                },
+                                {
+                                    name: 'Inventory',
+                                    checklist: Inventory,
+                                    score: null
+                                },
+                                {
+                                    name: 'Appearance',
+                                    checklist: Appearance,
+                                    score: null
                                 }
                             ],
                             score: null
                         },
                         {
-                            name: "Part II: Kitchen",
-                            subdivisions: [],
+                            name: "Kitchen",
+                            subdivisions: [
+                                {
+                                    name: "Kitchen",
+                                    checklist: Kitchen,
+                                    score: null
+                                }
+                            ],
                             score: null
                         }
                     ],

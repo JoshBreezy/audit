@@ -1,6 +1,7 @@
 import { useDB } from '../Contexts/dbContext';
 import { useState } from 'react';
 import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import appearance from './../Lists/Operations/Bar/Appearance';
 
 export default function TableOfContents(props) {
 
@@ -10,12 +11,14 @@ export default function TableOfContents(props) {
     const [partIIIOpen, setPartIIIOpen] = useState(false);
     const [partIVOpen, setPartIVOpen] = useState(false);
     const [opOpen, setOpOpen] = useState(false);
+    const [opOpenII, setOpOpenII] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
     const togglePartII = () => setPartIIOpen(!partIIOpen);
     const togglePartIII = () => setPartIIIOpen(!partIIIOpen);
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
     const toggleOp = () => setOpOpen(!opOpen);
+    const toggleOpII = () => setOpOpenII(!opOpenII);
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -53,7 +56,13 @@ export default function TableOfContents(props) {
         setSubdivision(e.target.textContent);
     }
 
-    return(
+    const handleOpKitch = (e) => {
+        setPart('Kitchen');
+        setSection('Operations');
+        setSubdivision(e.target.textContent);
+    }
+
+    return (
         <div className='contents col-3 card'>
             <ul>
                 <li>Environment</li>
@@ -116,16 +125,23 @@ export default function TableOfContents(props) {
                     <li>Part III: Kitchen</li>
                 </ul>
                 <li>Operations</li>
-                    <ul className='p-0'>
-                        <Dropdown isOpen={opOpen} toggle={toggleOp}>
-                            <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem onClick={handleOpBar}>Closing Checklist</DropdownItem>
-                                <DropdownItem onClick={handleOpBar}>Opening Checklist</DropdownItem>
-                                <DropdownItem onClick={handleOpBar}>Quality Control</DropdownItem>
-                            </DropdownMenu>
-                        </Dropdown>
-                    <li>Part II: Kitchen</li>
+                <ul className='p-0'>
+                    <Dropdown isOpen={opOpen} toggle={toggleOp}>
+                        <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleOpBar}>Closing Checklist</DropdownItem>
+                            <DropdownItem onClick={handleOpBar}>Opening Checklist</DropdownItem>
+                            <DropdownItem onClick={handleOpBar}>Quality Control</DropdownItem>
+                            <DropdownItem onClick={handleOpBar}>Inventory</DropdownItem>
+                            <DropdownItem onClick={handleOpBar}>Appearance</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                    <Dropdown isOpen={opOpenII} toggle={toggleOpII}>
+                        <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleOpKitch}>Kitchen</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </ul>
             </ul>
         </div>
