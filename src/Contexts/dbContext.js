@@ -24,6 +24,7 @@ import Appearance from '../Lists/Operations/Bar/Appearance';
 import Kitchen from '../Lists/Operations/Kitchen/Kitchen';
 import FrontOfHouse from '../Lists/TeamT&D/FrontOfHouse';
 import BarTD from '../Lists/TeamT&D/BarTD';
+import KitchenTD from '../Lists/TeamT&D/KitchenTD';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
@@ -244,8 +245,14 @@ export function DBProvider({ children }){
                             score: null
                         },
                         {
-                            name: "Part III: Kitchen",
-                            subdivisions: [],
+                            name: "Kitchen",
+                            subdivisions: [
+                                {
+                                    name: "Kitchen",
+                                    checklist: KitchenTD,
+                                    score: null
+                                }
+                            ],
                             score: null
                         }
                     ],

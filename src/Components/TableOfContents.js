@@ -13,6 +13,7 @@ export default function TableOfContents(props) {
     const [opOpenII, setOpOpenII] = useState(false);
     const [TTDOpen, setTTDOpen] = useState(false);
     const [TTD2Open, setTTD2Open] = useState(false);
+    const [TTD3Open, setTTD3Open] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
     const togglePartII = () => setPartIIOpen(!partIIOpen);
@@ -22,6 +23,7 @@ export default function TableOfContents(props) {
     const toggleOpII = () => setOpOpenII(!opOpenII);
     const toggleTTD = () => setTTDOpen(!TTDOpen);
     const toggleTTD2 = () => setTTD2Open(!TTD2Open);
+    const toggleTTD3 = () => setTTD3Open(!TTD3Open);
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -73,6 +75,12 @@ export default function TableOfContents(props) {
 
     const handleTD2 = (e) => {
         setPart('Bar');
+        setSection('Team Training & Development');
+        setSubdivision(e.target.textContent);
+    }
+
+    const handleTD3 = (e) => {
+        setPart('Kitchen');
         setSection('Team Training & Development');
         setSubdivision(e.target.textContent);
     }
@@ -145,6 +153,12 @@ export default function TableOfContents(props) {
                         <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleTD2}>Bar</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
+                    <Dropdown isOpen={TTD3Open} toggle={toggleTTD3}>
+                        <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleTD3}>Kitchen</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                 </ul>

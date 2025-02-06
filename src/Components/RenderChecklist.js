@@ -65,6 +65,15 @@ export default function RenderChecklist () {
         setAudit(updatedAudit);
     }
 
+    const handleTextInput = (selectedValue, index) => {
+        const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, idx) => 
+            idx === index ? {...item, value: parseInt(selectedValue, 10)} : item
+        );
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        setAudit(updatedAudit);
+    }
+
 
     const removePrevDed = () => {
         const len = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.length;
@@ -227,7 +236,13 @@ export default function RenderChecklist () {
                         <Label for={item.scaleText}>
                             {item.scaleText}
                         </Label>
-                        <Input type='text' id={item.scaleText} name={item.scaleText} value={item.value} />
+                        <Input 
+                            type='text' 
+                            id={item.scaleText} 
+                            name={item.scaleText} 
+                            defaultValue={item.value}
+                            onChange={(e) => handleTextInput(e.target.value, index)}
+                        />
                         <p className='mt-2'>10 points per Team Member - training must be fully complete, reviewed, and acceptably graded for a pass to achieve full points – no partial scoring</p>
                     </FormGroup>
                 )
