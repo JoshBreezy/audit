@@ -1,8 +1,11 @@
 import { useDB } from '../Contexts/dbContext';
 import { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
+import { useNavigate } from 'react-router-dom';
+import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu, Button } from 'reactstrap';
 
 export default function TableOfContents(props) {
+
+    const navigate = useNavigate();
 
     const { setSection, setPart, setSubdivision } = useDB();
     const [partIOpen, setPartIOpen] = useState(false);
@@ -85,6 +88,12 @@ export default function TableOfContents(props) {
         setSubdivision(e.target.textContent);
     }
 
+    const handleGET = (e) => {
+        setPart('Guest Experience');
+        setSection('Guest Experience');
+        setSubdivision(e.target.textContent);
+    }
+
     return (
         <div className='contents col-3 card'>
             <ul>
@@ -135,11 +144,8 @@ export default function TableOfContents(props) {
                     <li onClick={handleQual}>Part III: Attention to Detail</li>
                 </ul>
                 <li>Guest Experience</li>
-                <ul>
-                    <li>Dining Room GET</li>
-                    <li>Ambience, Team Service & Appearance</li>
-                    <li>Bar GET</li>
-                    <li>Ambience, Team Service & Appearance</li>
+                <ul className='p-0'>
+                    <Button className='col-12' onClick={handleGET} >GET</Button>
                 </ul>
                 <li>Team Training & Development</li>
                 <ul className='p-0'>
