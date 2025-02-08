@@ -3,6 +3,7 @@ import { useState, useRef } from 'react';
 import Webcam from "react-webcam";
 import { useDB } from '../Contexts/dbContext';
 import cloneDeep from 'lodash/cloneDeep';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const videoConstraints = {
     width: 540,
@@ -193,6 +194,7 @@ export default function RenderChecklist() {
                             <Label check for={index.toString()}>
                                 {item.text}
                             </Label>
+                            {item.photo && <FontAwesomeIcon icon="fa-regular fa-camera-retro" />}
                         </FormGroup>
                     )
                 }
