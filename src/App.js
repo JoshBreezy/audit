@@ -9,7 +9,7 @@ import ViewPreviousAudit from './Components/ViewPreviousAudit';
 import VenturaQ3 from './Components/VenturaQ3';
 import CreateUser from './Components/CreateUser';
 import Login from './Components/Login';
-import RenderGet from './Components/RenderGET';
+import RenderGet from './Components/RenderDiningGET';
 
 
 function App() {

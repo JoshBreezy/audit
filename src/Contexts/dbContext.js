@@ -25,7 +25,8 @@ import Kitchen from '../Lists/Operations/Kitchen/Kitchen';
 import FrontOfHouse from '../Lists/TeamT&D/FrontOfHouse';
 import BarTD from '../Lists/TeamT&D/BarTD';
 import KitchenTD from '../Lists/TeamT&D/KitchenTD';
-import get from '../Lists/GuestExperience/GET';
+import DiningGet from '../Lists/GuestExperience/DiningGET';
+import BarGet from '../Lists/GuestExperience/BarGET';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
@@ -201,8 +202,13 @@ export function DBProvider({ children }){
                             name: "Guest Experience",
                             subdivisions: [
                                 {
-                                    name: "GET",
-                                    checklist: get,
+                                    name: "Dining Room",
+                                    checklist: DiningGet,
+                                    score: null
+                                },
+                                {
+                                    name: "Bar",
+                                    checklist: BarGet,
                                     score: null
                                 }
                             ],

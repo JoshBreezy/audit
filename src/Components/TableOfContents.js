@@ -17,6 +17,7 @@ export default function TableOfContents(props) {
     const [TTDOpen, setTTDOpen] = useState(false);
     const [TTD2Open, setTTD2Open] = useState(false);
     const [TTD3Open, setTTD3Open] = useState(false);
+    const [getOpen, setGetOpen] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
     const togglePartII = () => setPartIIOpen(!partIIOpen);
@@ -27,6 +28,7 @@ export default function TableOfContents(props) {
     const toggleTTD = () => setTTDOpen(!TTDOpen);
     const toggleTTD2 = () => setTTD2Open(!TTD2Open);
     const toggleTTD3 = () => setTTD3Open(!TTD3Open);
+    const toggleGet = () => setGetOpen(!getOpen);
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -145,7 +147,13 @@ export default function TableOfContents(props) {
                 </ul>
                 <li>Guest Experience</li>
                 <ul className='p-0'>
-                    <Button className='col-12' onClick={handleGET} >GET</Button>
+                    <Dropdown isOpen={getOpen} toggle={toggleGet}>
+                        <DropdownToggle className='col-12' caret>GET</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem onClick={handleGET}>Dining Room</DropdownItem>
+                            <DropdownItem onClick={handleGET}>Bar</DropdownItem>
+                        </DropdownMenu>
+                    </Dropdown>
                 </ul>
                 <li>Team Training & Development</li>
                 <ul className='p-0'>
