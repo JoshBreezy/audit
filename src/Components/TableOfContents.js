@@ -1,33 +1,22 @@
 import { useDB } from '../Contexts/dbContext';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu, Button } from 'reactstrap';
 
-export default function TableOfContents(props) {
-
-    const navigate = useNavigate();
+export default function TableOfContents() {
 
     const { setSection, setPart, setSubdivision } = useDB();
     const [partIOpen, setPartIOpen] = useState(false);
-    const [partIIOpen, setPartIIOpen] = useState(false);
     const [partIIIOpen, setPartIIIOpen] = useState(false);
     const [partIVOpen, setPartIVOpen] = useState(false);
     const [opOpen, setOpOpen] = useState(false);
     const [opOpenII, setOpOpenII] = useState(false);
-    const [TTDOpen, setTTDOpen] = useState(false);
-    const [TTD2Open, setTTD2Open] = useState(false);
-    const [TTD3Open, setTTD3Open] = useState(false);
     const [getOpen, setGetOpen] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
-    const togglePartII = () => setPartIIOpen(!partIIOpen);
     const togglePartIII = () => setPartIIIOpen(!partIIIOpen);
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
     const toggleOp = () => setOpOpen(!opOpen);
     const toggleOpII = () => setOpOpenII(!opOpenII);
-    const toggleTTD = () => setTTDOpen(!TTDOpen);
-    const toggleTTD2 = () => setTTD2Open(!TTD2Open);
-    const toggleTTD3 = () => setTTD3Open(!TTD3Open);
     const toggleGet = () => setGetOpen(!getOpen);
 
     const handleEnvP1 = (e) => {
@@ -115,18 +104,8 @@ export default function TableOfContents(props) {
                             <DropdownItem onClick={handleEnvP1}>Exterior</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                    <Dropdown isOpen={partIIOpen} toggle={togglePartII}>
-                        <DropdownToggle className='col-12' caret>Environment Walk-Through</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={handleEnvP2}>Walk-Through</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <Dropdown isOpen={partIIIOpen} toggle={togglePartIII}>
-                        <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={handleEnvP3}>Bar</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                    <Button className='col-12' onClick={handleEnvP2}>Walk-Through</Button>
+                    <Button className='col-12' onClick={handleEnvP3}>Bar</Button>
                     <Dropdown isOpen={partIVOpen} toggle={togglePartIV}>
                         <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
                         <DropdownMenu>
@@ -157,24 +136,9 @@ export default function TableOfContents(props) {
                 </ul>
                 <li>Team Training & Development</li>
                 <ul className='p-0'>
-                    <Dropdown isOpen={TTDOpen} toggle={toggleTTD}>
-                        <DropdownToggle className='col-12' caret>Front of House</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={handleTD}>Front of House</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <Dropdown isOpen={TTD2Open} toggle={toggleTTD2}>
-                        <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={handleTD2}>Bar</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
-                    <Dropdown isOpen={TTD3Open} toggle={toggleTTD3}>
-                        <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={handleTD3}>Kitchen</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                    <Button className='col-12' onClick={handleTD}>Front of House</Button>
+                    <Button className='col-12' onClick={handleTD2}>Bar</Button>
+                    <Button className='col-12' onClick={handleTD3}>Kitchen</Button>
                 </ul>
                 <li>Operations</li>
                 <ul className='p-0'>
@@ -188,12 +152,7 @@ export default function TableOfContents(props) {
                             <DropdownItem onClick={handleOpBar}>Appearance</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                    <Dropdown isOpen={opOpenII} toggle={toggleOpII}>
-                        <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
-                        <DropdownMenu>
-                            <DropdownItem onClick={handleOpKitch}>Kitchen</DropdownItem>
-                        </DropdownMenu>
-                    </Dropdown>
+                    <Button className='col-12' onClick={handleOpKitch}>Kitchen</Button>
                 </ul>
             </ul>
         </div>

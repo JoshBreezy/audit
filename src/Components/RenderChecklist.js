@@ -1,9 +1,10 @@
-import { Form, FormGroup, ModalHeader, Input, Label, Modal, ModalBody, ModalFooter, Button, Container, Table } from 'reactstrap';
+import { Form, FormGroup, ModalHeader, Input, Label, Modal, ModalBody, ModalFooter, Button, Container } from 'reactstrap';
 import { useState, useRef } from 'react';
 import Webcam from "react-webcam";
 import { useDB } from '../Contexts/dbContext';
 import cloneDeep from 'lodash/cloneDeep';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 
 const videoConstraints = {
     width: 540,
@@ -51,25 +52,6 @@ export default function RenderChecklist() {
         );
         setPosition(position);
         updatedCheck[position].check && toggleReq();
-        const updatedAudit = cloneDeep(audit);
-        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
-        setAudit(updatedAudit);
-    }
-
-
-    const handleDropVal = (selectedValue, index) => {
-        const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, idx) =>
-            idx === index ? { ...item, value: parseInt(selectedValue, 10) } : item
-        );
-        const updatedAudit = cloneDeep(audit);
-        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
-        setAudit(updatedAudit);
-    }
-
-    const handleTextInput = (selectedValue, index) => {
-        const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, idx) =>
-            idx === index ? { ...item, value: parseInt(selectedValue, 10) } : item
-        );
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
         setAudit(updatedAudit);
@@ -187,65 +169,15 @@ export default function RenderChecklist() {
                     return (
                         <FormGroup check key={item.text} >
                             <Input type='checkbox'
+                                className='col-1'
                                 id={index.text}
                                 name={item.text}
                                 checked={item.check}
                                 onChange={() => handleCheck(index)} />
-                            <Label check for={index.toString()}>
+                            <Label check for={index.toString()} className='col-8'>
                                 {item.text}
                             </Label>
-                            {item.photo && <FontAwesomeIcon icon="fa-regular fa-camera-retro" />}
-                        </FormGroup>
-                    )
-                }
-                if (item.dropText) {
-                    return (
-                        <FormGroup key={item.dropText}>
-                            <Label for={item.dropText}>
-                                {item.dropText}
-                            </Label>
-                            <Input type='select'
-                                id={item.droptext}
-                                name={item.dropText}
-                                defaultValue={item.value}
-                                onChange={(e) => handleDropVal(e.target.value, index)}
-                            >
-                                <option value={1}>1</option>
-                                <option value={2}>2</option>
-                                <option value={3}>3</option>
-                                <option value={4}>4</option>
-                                <option value={5}>5</option>
-                            </Input>
-                        </FormGroup>
-                    )
-                }
-                if (item.tdText) {
-                    return (
-                        <>
-                            <ul>
-                                {item.tdText.map((item) => {
-                                    return (
-                                        <li>{item}</li>
-                                    )
-                                })}
-                            </ul>
-                        </>
-                    )
-                }
-                if (item.scaleText) {
-                    return (
-                        <FormGroup key={item.scaleText}>
-                            <Label for={item.scaleText}>
-                                {item.scaleText}
-                            </Label>
-                            <Input
-                                type='text'
-                                id={item.scaleText}
-                                name={item.scaleText}
-                                defaultValue={item.value}
-                                onChange={(e) => handleTextInput(e.target.value, index)}
-                            />
-                            <p className='mt-2'>10 points per Team Member - training must be fully complete, reviewed, and acceptably graded for a pass to achieve full points – no partial scoring</p>
+                            {item.photo && <FontAwesomeIcon icon={faCameraRetro} />}
                         </FormGroup>
                     )
                 }
