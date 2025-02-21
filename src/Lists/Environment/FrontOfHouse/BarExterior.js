@@ -55,7 +55,7 @@ const barExterior = [
         check: false
     },
     {
-        text: 'Finney tablets clean and fully opera>onal',
+        text: 'Finney tablets clean and fully operational',
         value: 1,
         check: false
     },
@@ -105,7 +105,7 @@ const barExterior = [
         check: false
     },
     {
-        text: 'high ceiling area clean and well-maintained (ligh>ng fixtures, ductwork, etc.)',
+        text: 'high ceiling area clean and well-maintained (lighting fixtures, ductwork, etc.)',
         value: 1,
         check: false
     },
@@ -120,12 +120,12 @@ const barExterior = [
         check: false
     },
     {
-        text: 'ice machine clean and fully func>onal',
+        text: 'ice machine clean and fully functional',
         value: 1,
         check: false
     },
     {
-        text: 'no evidence of pest ac>vity (10 points)',
+        text: 'no evidence of pest activity (10 points)',
         value: 10,
         check: false
     }

@@ -5,16 +5,13 @@ import RenderDiningGet from './RenderDiningGET';
 import RenderBarGet from './RenderBarGET';
 import KitchDrop from './KitchDrop';
 import RenderTD from './RenderTD';
+import RenderWalk from './RenderWalk';
 import { useDB } from '../Contexts/dbContext';
-import { useEffect } from 'react';
 
 export default function RenderAudit () {
 
-    const {section, part, subdivision, audit, updateAudit} = useDB();
+    const {section, part, subdivision, audit} = useDB();
 
-    useEffect(() => {
-        updateAudit(audit);
-    }, [audit, updateAudit]);
 
 
     return (
@@ -33,13 +30,14 @@ export default function RenderAudit () {
                         <Card className='col-12'>
                             <CardTitle><h5>{part}</h5></CardTitle>
                             <CardBody>
-                                <CardText><h5>{subdivision}</h5></CardText>
+                                <h5>{subdivision}</h5>
                                 <Form>
-                                    {(section === 'Environment' || (section === 'Operations' && part === 'Bar')) && <RenderChecklist />}
+                                    {((section === 'Environment' && subdivision !== 'Walk-Through' )|| (section === 'Operations' && part === 'Bar')) && <RenderChecklist props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                     {(section === 'Guest Experience' && subdivision === 'Dining Room' ) && <RenderDiningGet props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                     {(section === 'Guest Experience' && subdivision === 'Bar' ) && <RenderBarGet props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                     {(section === 'Operations' && part === 'Kitchen') && <KitchDrop props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} /> }
                                     {section === 'Team Training & Development' && <RenderTD props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} /> }
+                                    {(section === 'Environment' && subdivision === 'Walk-Through') && <RenderWalk props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                 </Form>
                             </CardBody>
                         </Card>

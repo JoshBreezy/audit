@@ -1,5 +1,6 @@
 const walkthrough = [
-    { subtext: {
+    { subtext: 
+        {
         Managers: {
             bullet: 'Manager conducts a thorough Environment Walk-Through of both the interior (Front Entry Area, Dining Area, Bar Area, Restrooms and Games Room) and exterior (Front Entry Area and Patio Area) before opening the doors to the Guests.'
         },

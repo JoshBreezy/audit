@@ -6,17 +6,13 @@ export default function TableOfContents() {
 
     const { setSection, setPart, setSubdivision } = useDB();
     const [partIOpen, setPartIOpen] = useState(false);
-    const [partIIIOpen, setPartIIIOpen] = useState(false);
     const [partIVOpen, setPartIVOpen] = useState(false);
     const [opOpen, setOpOpen] = useState(false);
-    const [opOpenII, setOpOpenII] = useState(false);
     const [getOpen, setGetOpen] = useState(false);
 
     const togglePartI = () => setPartIOpen(!partIOpen);
-    const togglePartIII = () => setPartIIIOpen(!partIIIOpen);
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
     const toggleOp = () => setOpOpen(!opOpen);
-    const toggleOpII = () => setOpOpenII(!opOpenII);
     const toggleGet = () => setGetOpen(!getOpen);
 
     const handleEnvP1 = (e) => {

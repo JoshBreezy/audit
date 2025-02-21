@@ -4,7 +4,7 @@ import Webcam from "react-webcam";
 import { useDB } from '../Contexts/dbContext';
 import cloneDeep from 'lodash/cloneDeep';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { faCameraRetro } from '@fortawesome/free-solid-svg-icons';
 
 const videoConstraints = {
     width: 540,
@@ -12,20 +12,34 @@ const videoConstraints = {
 };
 
 
-export default function RenderChecklist(props) {
+
+
+
+export default function OldRenderChecklist(props) {
 
     const { section, part, subdivision, audit, setAudit } = useDB();
     const webcamRef = useRef(null);
+    const [url, setUrl] = useState(null);
     const [modal, setModal] = useState(false);
     const [camera, setCamera] = useState(false);
     const [position, setPosition] = useState();
     const [picModal, setPicModal] = useState(false);
+    const togglePic = setPicModal(!picModal);
     const [pic, setPic] = useState(null);
-    const [dedOpen, setDedOpen] = useState(false);
-    const [dedText, setDedText] = useState();
 
-    const toggleReq = () => setModal(!modal);
-    const togglePic = () => setPicModal(!picModal);
+
+    function capture() {
+        const imageSrc = webcamRef.current.getScreenshot();
+        setUrl(imageSrc);
+        const updatedCheck = props.props.map((item, index) =>
+            position === index ? { ...item, photo: imageSrc } : item
+        );
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        setAudit(updatedAudit);
+        setCamera(false);
+        console.log(url);
+    }
 
 
     function handleCheck(position) {
@@ -33,14 +47,12 @@ export default function RenderChecklist(props) {
             position === index ? { ...item, check: !item.check } : item
         );
         setPosition(position);
-        if(!updatedCheck[position].check) {
-            updatedCheck[position].photo = null;
-        }
         updatedCheck[position].check && toggleReq();
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
         setAudit(updatedAudit);
     }
+
 
     const removePrevDed = () => {
         const len = props.props.length;
@@ -56,6 +68,10 @@ export default function RenderChecklist(props) {
         toggleReq();
         setCamera(true);
     }
+
+    const toggleReq = () => setModal(!modal);
+
+    const [dedOpen, setDedOpen] = useState(false);
 
     const handleAddDed = () => {
         setDedOpen(!dedOpen);
@@ -74,26 +90,17 @@ export default function RenderChecklist(props) {
         setDedOpen(false);
     }
 
+    const [dedText, setDedText] = useState();
+
     const handleDedChange = (event) => {
         setDedText(event.target.value);
     }
 
-    const displayPhoto = (index) => {
-        setPic(audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist[index].photo);
+    const displayPhoto = (photo) => {
+        setPic(photo);
         togglePic();
     }
 
-    function capture() {
-            const imageSrc = webcamRef.current.getScreenshot();
-            const updatedCheck = props.props.map((item, index) =>
-                position === index ? { ...item, photo: imageSrc } : item
-            );
-            const updatedAudit = cloneDeep(audit);
-            updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
-            setAudit(updatedAudit);
-            setCamera(false);
-            setPosition(null);
-        }
 
     return (
         <>
@@ -129,8 +136,10 @@ export default function RenderChecklist(props) {
                     </Form>
                 </ModalBody>
             </Modal>
-            <Modal isOpen={picModal} size='lg' toggle={togglePic} centered >
-                    <img src={pic} alt='deduction' />
+            <Modal isOpen={picModal} toggle={togglePic} centered>
+                <ModalBody>
+                    <img src={`data:image/jpeg;base64,${pic}`} alt='deduction' />
+                </ModalBody>
             </Modal>
             {props.props.map((item, index) => {
                 return (
@@ -143,7 +152,7 @@ export default function RenderChecklist(props) {
                         <Label check for={item.text} className='col-8'>
                             {item.text}
                         </Label>
-                        {item.photo && <FontAwesomeIcon icon={faImage} onClick={() => displayPhoto(index)} />}
+                        {item.photo && <FontAwesomeIcon icon={faCameraRetro} onClick={displayPhoto(item.photo)} />}
                     </FormGroup>
                 )
             })}
@@ -151,7 +160,4 @@ export default function RenderChecklist(props) {
             <Button color='danger' className='btn mt-2 ms-4' onClick={removePrevDed}>Undo Previous Additional Deduction</Button>
         </>
     )
-
-
-
 }
