@@ -33,7 +33,6 @@ export default function UnfinishedList () {
             }
         );
         const json = await response.json();
-        console.log(json);
         setAudit(json);
         navigate('/auditstart');
     }
@@ -54,14 +53,16 @@ export default function UnfinishedList () {
                     <tbody>
                         {auditList && 
                             auditList.map((item, index) => {
-                                return(
-                                    <tr key={index}>
-                                        <th scope='row' onClick={() => handleSelect(item._id)}>{item._id.substring(17)}</th>
-                                        <td>{item.location}</td>
-                                        <td>{item.createdAt}</td>
-                                        <td>{item.author}</td>
-                                    </tr>
-                                )
+                                if (item.finalized === false) {
+                                    return(
+                                        <tr key={index}>
+                                            <th scope='row' onClick={() => handleSelect(item._id)}>{item._id.substring(17)}</th>
+                                            <td>{item.location}</td>
+                                            <td>{item.createdAt}</td>
+                                            <td>{item.author}</td>
+                                        </tr>
+                                    )
+                                }
                             })
                         }
                     </tbody>

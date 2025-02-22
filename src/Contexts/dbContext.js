@@ -39,6 +39,8 @@ export function useDB() {
 
 export function DBProvider({ children }){
 
+    const [finalizeModal, setFinalizeModal] = useState(false);
+
     const [token, setToken_] = useState(localStorage.getItem('token') || null);
 
     function setToken(newToken) {
@@ -58,6 +60,7 @@ export function DBProvider({ children }){
             _id: null,
             location: null,
             author: null,
+            finalized: false,
             sections: [
                 {
                     name: "Environment",
@@ -312,6 +315,7 @@ export function DBProvider({ children }){
         _id: null,
         location: null,
         author: null,
+        finalized: false,
         sections: [
             {
                 name: "Environment",
@@ -594,7 +598,9 @@ export function DBProvider({ children }){
         user,
         setUser,
         updateAudit,
-        defaultAudit
+        defaultAudit,
+        finalizeModal,
+        setFinalizeModal
     }
     return(
         <dbContext.Provider value={value}>

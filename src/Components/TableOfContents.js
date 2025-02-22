@@ -1,10 +1,13 @@
 import { useDB } from '../Contexts/dbContext';
 import { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu, Button } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownItem, DropdownMenu, Button, Modal, ModalBody, ModalHeader } from 'reactstrap';
+import cloneDeep from 'lodash/cloneDeep';
+import { useNavigate } from 'react-router-dom';
 
 export default function TableOfContents() {
+    const navigate = useNavigate();
 
-    const { setSection, setPart, setSubdivision } = useDB();
+    const { setSection, setPart, setSubdivision, setFinalizeModal, finalizeModal, audit, updateAudit } = useDB();
     const [partIOpen, setPartIOpen] = useState(false);
     const [partIVOpen, setPartIVOpen] = useState(false);
     const [opOpen, setOpOpen] = useState(false);
@@ -14,6 +17,15 @@ export default function TableOfContents() {
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
     const toggleOp = () => setOpOpen(!opOpen);
     const toggleGet = () => setGetOpen(!getOpen);
+    const toggleFinal = () => setFinalizeModal(!finalizeModal);
+
+    const handleFinalize = () => {
+        const finalAudit = cloneDeep(audit);
+        finalAudit.finalized = true;
+        updateAudit(finalAudit);
+        toggleFinal();
+        navigate('/landing');
+    }
 
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
@@ -151,6 +163,14 @@ export default function TableOfContents() {
                     <Button className='col-12' onClick={handleOpKitch}>Kitchen</Button>
                 </ul>
             </ul>
+            <Modal isOpen={finalizeModal} toggle={toggleFinal} centered>
+                <ModalHeader>Are you sure you want to finalize?</ModalHeader>
+                <ModalBody className='d-flex justify-content-center'>
+                    <Button className='col col-5 m-3' color='danger' onClick={handleFinalize} >Finalize</Button>
+                    <Button className='col col-5 m-3' color='primary' onClick={toggleFinal} >Cancel</Button>
+                </ModalBody>
+            </Modal>
+            <Button className='col-11 align-self-end' color='danger' onClick={toggleFinal} >Finalize</Button>
         </div>
     )
 }
