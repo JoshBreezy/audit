@@ -46,11 +46,11 @@ export function DBProvider({ children }){
         localStorage.setItem('token', newToken);
     }
 
-    const [user, setUser_] = useState(null);
+    const [user, setUser_] = useState(JSON.parse(localStorage.getItem('user')) || null);
 
     function setUser(newUser) {
         setUser_(newUser);
-        localStorage.setItem('user', newUser);
+        localStorage.setItem('user', JSON.stringify(newUser));
     }
 
     const[audit, setAudit] = useState(
@@ -308,6 +308,259 @@ export function DBProvider({ children }){
         }
     )
 
+    const defaultAudit = {
+        _id: null,
+        location: null,
+        author: null,
+        sections: [
+            {
+                name: "Environment",
+                parts: [
+                    {
+                        name: "Part I: Front of House",
+                        subdivisions: [
+                            {
+                                name: "Front Entry Area",
+                                checklist: FrontEntryArea,
+                                score: null
+                            },
+                            {
+                                name: "Dining Area",
+                                checklist: DiningArea,
+                                score: null
+                            },
+                            {
+                                name: "Bar (Exterior)",
+                                checklist: BarExterior,
+                                score: null
+                            },
+                            {
+                                name: "Women's Restroom",
+                                checklist: WomensRestroom,
+                                score: null
+                            },
+                            {
+                                name: "Men's Restroom",
+                                checklist: MensRestroom,
+                                score: null
+                            },
+                            {
+                                name: "Games Room",
+                                checklist: GamesRoom,
+                                score: null
+                            },
+                            {
+                                name: "Expo Line",
+                                checklist: ExpoLine,
+                                score: null
+                            },
+                            {
+                                name: "Patio Area",
+                                checklist: PatioArea,
+                                score: null
+                            },
+                            {
+                                name: "Exterior",
+                                checklist: Exterior,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    },
+                    {
+                        name: "Part II: Environment Walk-Through",
+                        subdivisions: [
+                            {
+                                name: "Walk-Through",
+                                checklist: Walkthrough,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    },
+                    {
+                        name: "Part III: Bar",
+                        subdivisions: [
+                            {
+                                name: "Bar",
+                                checklist: Bar,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    },
+                    {
+                        name: "Part IV: Kitchen",
+                        subdivisions: [
+                            {
+                                name: "Exterior Back Area",
+                                checklist: ExteriorBackArea,
+                                score: null
+                            },
+                            {
+                                name: "Office",
+                                checklist: Office,
+                                score: null
+                            },
+                            {
+                                name: "Prep Area",
+                                checklist: PrepArea,
+                                score: null
+                            },
+                            {
+                                name: "Dry Storage",
+                                checklist: DryStorage,
+                                score: null
+                            },
+                            {
+                                name: "Cooking Line",
+                                checklist: CookingLine,
+                                score: null
+                            },
+                            {
+                                name: "Dish Area",
+                                checklist: DishArea,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    }
+                ],
+                score: null
+            },
+            {
+                name: "Quality Control",
+                parts: [
+                    {
+                        name: "Part I: Food Audit",
+                        subdivisions: [],
+                        score: null
+                    },
+                    {
+                        name: "Part II: Focused Menu Items",
+                        subdivisions: [],
+                        score: null
+                    },
+                    {
+                        name: "Part III: Attention to detail",
+                        subdivisions: [],
+                        score: null
+                    }
+                ],
+                score: null
+            },
+            {
+                name: "Guest Experience",
+                parts: [
+                    {
+                        name: "Guest Experience",
+                        subdivisions: [
+                            {
+                                name: "Dining Room",
+                                checklist: DiningGet,
+                                score: null
+                            },
+                            {
+                                name: "Bar",
+                                checklist: BarGet,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    }
+                ],
+                score: null
+            },
+            {
+                name: "Team Training & Development",
+                parts: [
+                    {
+                        name: "Front of House",
+                        subdivisions: [
+                            {
+                                name: "Front of House",
+                                checklist: FrontOfHouse,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    },
+                    {
+                        name: "Bar",
+                        subdivisions: [
+                            {
+                                name: "Bar",
+                                checklist: BarTD,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    },
+                    {
+                        name: "Kitchen",
+                        subdivisions: [
+                            {
+                                name: "Kitchen",
+                                checklist: KitchenTD,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    }
+                ],
+                score: null
+            },
+            {
+                name: "Operations",
+                parts: [
+                    {
+                        name: "Bar",
+                        subdivisions: [
+                            {
+                                name: "Closing Checklist",
+                                checklist: ClosingChecklist,
+                                score: null
+                            },
+                            {
+                                name: "Opening Checklist",
+                                checklist: OpeningChecklist,
+                                score: null
+                            },
+                            {
+                                name: 'Quality Control',
+                                checklist: QualityControl,
+                                score: null
+                            },
+                            {
+                                name: 'Inventory',
+                                checklist: Inventory,
+                                score: null
+                            },
+                            {
+                                name: 'Appearance',
+                                checklist: Appearance,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    },
+                    {
+                        name: "Kitchen",
+                        subdivisions: [
+                            {
+                                name: "Kitchen",
+                                checklist: Kitchen,
+                                score: null
+                            }
+                        ],
+                        score: null
+                    }
+                ],
+                score: null
+            }
+        ]
+    };
+
     const [section, setSection] = useState('Environment');
     const [part, setPart] = useState('Part I: Front of House');
     const [subdivision, setSubdivision] = useState('Front Entry Area');
@@ -317,7 +570,7 @@ export function DBProvider({ children }){
             const response = await fetch(`${URL}/audits/${updatedAudit._id}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(audit)
+                body: JSON.stringify(updatedAudit)
             });
             const json = await response.json();
             console.log(json);
@@ -340,7 +593,8 @@ export function DBProvider({ children }){
         setSubdivision,
         user,
         setUser,
-        updateAudit
+        updateAudit,
+        defaultAudit
     }
     return(
         <dbContext.Provider value={value}>

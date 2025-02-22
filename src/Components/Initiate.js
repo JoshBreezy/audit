@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const {audit, setAudit, URL, token, user} = useDB();
+    const { defaultAudit, setAudit, URL, token, user } = useDB();
     const [active, setActive] = useState();
     const [startEnable, setStartEnable] = useState(true);
     const navigate= useNavigate();
@@ -16,7 +16,7 @@ export default function Initiate () {
                 const response = await fetch(`${URL}/locations`,
                     {headers: {'Authorization': `Bearer ${token}`}}
                 );
-                const json = await response.json()
+                const json = await response.json();
                 setLocations(json[0].locations);
             } catch (error) {
                 console.log(error)
@@ -37,12 +37,12 @@ export default function Initiate () {
                 headers: {'Content-Type' : 'application/json', 'Authorization': `Bearer ${token}`},
                 body: JSON.stringify({
                     location: active.location,
-                    author: user._id
+                    author: user.username,
+                    authorID: user._id
                 })
             })
             const json = await response.json();
-            console.log(audit);
-            const updatedAudit = {...audit, _id: json._id, location: active.location, author: user._id};
+            const updatedAudit = {...defaultAudit, _id: json._id, location: active.location, author: user.username, authorID : user._id};
             setAudit(updatedAudit);
             navigate('/auditstart');
         } catch (error) {

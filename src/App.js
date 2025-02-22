@@ -9,7 +9,7 @@ import ViewPreviousAudit from './Components/ViewPreviousAudit';
 import VenturaQ3 from './Components/VenturaQ3';
 import CreateUser from './Components/CreateUser';
 import Login from './Components/Login';
-import RenderGet from './Components/RenderDiningGET';
+import UnfinishedList from './Components/UnfinishedList';
 
 
 function App() {
@@ -35,6 +35,7 @@ function App() {
         <Route path='/landing' element={<Landing />} />
         <Route path='/initiate' element={<Initiate />} />
         <Route path='/auditstart' element={<RenderAudit />} />
+        <Route path='/selectUnfinished' element={<UnfinishedList />} />
         <Route path='/viewprev' element={<ViewPreviousAudit />} />
         <Route path='/viewprev/VenturaQ3' element={<VenturaQ3 />} />
       </Routes>

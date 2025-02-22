@@ -14,7 +14,7 @@ const videoConstraints = {
 
 export default function RenderChecklist(props) {
 
-    const { section, part, subdivision, audit, setAudit } = useDB();
+    const { section, part, subdivision, audit, setAudit, updateAudit } = useDB();
     const webcamRef = useRef(null);
     const [modal, setModal] = useState(false);
     const [camera, setCamera] = useState(false);
@@ -40,6 +40,7 @@ export default function RenderChecklist(props) {
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
         setAudit(updatedAudit);
+        updateAudit(updatedAudit);
     }
 
     const removePrevDed = () => {
@@ -49,6 +50,7 @@ export default function RenderChecklist(props) {
             const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.pop();
             setAudit(updatedAudit);
+            updateAudit(updatedAudit);
         }
     }
 
@@ -71,6 +73,7 @@ export default function RenderChecklist(props) {
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.push(newItem);
         setAudit(updatedAudit);
+        updateAudit(updatedAudit);
         setDedOpen(false);
     }
 
@@ -91,6 +94,7 @@ export default function RenderChecklist(props) {
             const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
             setAudit(updatedAudit);
+            updateAudit(updatedAudit);
             setCamera(false);
             setPosition(null);
         }

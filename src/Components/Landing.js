@@ -21,6 +21,11 @@ export default function Landing () {
             <div className='col-11 d-flex justify-content-center'><Link to='/viewprev' className='btn btn-primary btn-lg'>View Previous Audits</Link></div>
           </Row>
         </Container>
+        <Container>
+          <Row className='pt-4'>
+            {user.admin && <div className='col-11 d-flex justify-content-center'><Link to='/selectUnfinished' className='btn btn-primary btn-lg'>Continue Unfinished Audit</Link></div> }
+          </Row>
+        </Container>
       </>
     )
 }

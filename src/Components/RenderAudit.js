@@ -32,7 +32,7 @@ export default function RenderAudit () {
                             <CardBody>
                                 <h5>{subdivision}</h5>
                                 <Form>
-                                    {((section === 'Environment' && subdivision !== 'Walk-Through' )|| (section === 'Operations' && part === 'Bar')) && <RenderChecklist props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
+                                    {((section === 'Environment' && subdivision !== 'Walk-Through' ) || (section === 'Operations' && part === 'Bar')) && <RenderChecklist props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                     {(section === 'Guest Experience' && subdivision === 'Dining Room' ) && <RenderDiningGet props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                     {(section === 'Guest Experience' && subdivision === 'Bar' ) && <RenderBarGet props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
                                     {(section === 'Operations' && part === 'Kitchen') && <KitchDrop props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} /> }
