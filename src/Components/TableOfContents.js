@@ -99,7 +99,7 @@ export default function TableOfContents() {
                 <li>Environment</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={partIOpen} toggle={togglePartI}>
-                        <DropdownToggle className='col-12' caret>Front of House</DropdownToggle>
+                        <DropdownToggle className='col-12 mb-2' caret>Front of House</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleEnvP1}>Front Entry Area</DropdownItem>
                             <DropdownItem onClick={handleEnvP1}>Dining Area</DropdownItem>
@@ -112,10 +112,10 @@ export default function TableOfContents() {
                             <DropdownItem onClick={handleEnvP1}>Exterior</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                    <Button className='col-12' onClick={handleEnvP2}>Walk-Through</Button>
-                    <Button className='col-12' onClick={handleEnvP3}>Bar</Button>
+                    <Button className='col-12 mb-2' onClick={handleEnvP2}>Walk-Through</Button>
+                    <Button className='col-12 mb-2' onClick={handleEnvP3}>Bar</Button>
                     <Dropdown isOpen={partIVOpen} toggle={togglePartIV}>
-                        <DropdownToggle className='col-12' caret>Kitchen</DropdownToggle>
+                        <DropdownToggle className='col-12 mb-2' caret>Kitchen</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleEnvP4}>Exterior Back Area</DropdownItem>
                             <DropdownItem onClick={handleEnvP4}>Office</DropdownItem>
@@ -135,7 +135,7 @@ export default function TableOfContents() {
                 <li>Guest Experience</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={getOpen} toggle={toggleGet}>
-                        <DropdownToggle className='col-12' caret>GET</DropdownToggle>
+                        <DropdownToggle className='col-12 mb-2' caret>GET</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleGET}>Dining Room</DropdownItem>
                             <DropdownItem onClick={handleGET}>Bar</DropdownItem>
@@ -144,14 +144,14 @@ export default function TableOfContents() {
                 </ul>
                 <li>Team Training & Development</li>
                 <ul className='p-0'>
-                    <Button className='col-12' onClick={handleTD}>Front of House</Button>
-                    <Button className='col-12' onClick={handleTD2}>Bar</Button>
-                    <Button className='col-12' onClick={handleTD3}>Kitchen</Button>
+                    <Button className='col-12 mb-2' onClick={handleTD}>Front of House</Button>
+                    <Button className='col-12 mb-2' onClick={handleTD2}>Bar</Button>
+                    <Button className='col-12 mb-2' onClick={handleTD3}>Kitchen</Button>
                 </ul>
                 <li>Operations</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={opOpen} toggle={toggleOp}>
-                        <DropdownToggle className='col-12' caret>Bar</DropdownToggle>
+                        <DropdownToggle className='col-12 mb-2' caret>Bar</DropdownToggle>
                         <DropdownMenu>
                             <DropdownItem onClick={handleOpBar}>Closing Checklist</DropdownItem>
                             <DropdownItem onClick={handleOpBar}>Opening Checklist</DropdownItem>
@@ -160,7 +160,7 @@ export default function TableOfContents() {
                             <DropdownItem onClick={handleOpBar}>Appearance</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
-                    <Button className='col-12' onClick={handleOpKitch}>Kitchen</Button>
+                    <Button className='col-12 mb-2' onClick={handleOpKitch}>Kitchen</Button>
                 </ul>
             </ul>
             <Modal isOpen={finalizeModal} toggle={toggleFinal} centered>
@@ -170,7 +170,7 @@ export default function TableOfContents() {
                     <Button className='col col-5 m-3' color='primary' onClick={toggleFinal} >Cancel</Button>
                 </ModalBody>
             </Modal>
-            <Button className='col-11 align-self-end' color='danger' onClick={toggleFinal} >Finalize</Button>
+            <Button className='col-11 align-self-end mb-2' color='danger' onClick={toggleFinal} >Finalize</Button>
         </div>
     )
 }
