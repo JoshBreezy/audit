@@ -1,7 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, CardTitle, CardBody, Row, Container } from 'reactstrap';
+import {Card, CardTitle, CardBody, Row, Container, Modal, ModalBody, Alert } from 'reactstrap';
 import {Routes, Route} from 'react-router-dom';
+import { useDB } from './Contexts/dbContext';
+import { useEffect } from 'react';
 import Landing from './Components/Landing';
 import RenderAudit from './Components/RenderAudit';
 import Initiate from './Components/Initiate';
@@ -14,7 +16,14 @@ import UnfinishedList from './Components/UnfinishedList';
 
 function App() {
 
+  const { error, setError } = useDB();
   
+  useEffect(() => {
+    setTimeout(() => {
+      setError(null);
+    }, 4000)
+  },[error])
+
 
   return (
     <div className="App">
@@ -29,6 +38,7 @@ function App() {
             </Card>
         </Row>
       </Container>
+      {error && <Container><Row><Alert color='danger' centered>{error}</Alert></Row></Container>}
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/signup' element={<CreateUser />} />

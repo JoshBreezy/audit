@@ -41,6 +41,8 @@ export function DBProvider({ children }){
 
     const [finalizeModal, setFinalizeModal] = useState(false);
 
+    const [error, setError] = useState();
+
     const [token, setToken_] = useState(localStorage.getItem('token') || null);
 
     function setToken(newToken) {
@@ -582,7 +584,7 @@ export function DBProvider({ children }){
             const json = await response.json();
             console.log(json);
         } catch (error) {
-            console.log(error);
+            setError(error);
         }
     }
 
@@ -603,7 +605,9 @@ export function DBProvider({ children }){
         updateAudit,
         defaultAudit,
         finalizeModal,
-        setFinalizeModal
+        setFinalizeModal,
+        error,
+        setError
     }
     return(
         <dbContext.Provider value={value}>

@@ -6,10 +6,8 @@ import { useNavigate, Link } from 'react-router-dom';
 
 export default function Login() {
 
-    const { URL, setToken, setUser } = useDB();
+    const { URL, setToken, setUser, error, setError } = useDB();
     const [loading, setLoading] = useState(false);
-    const [response, setResponse] = useState(null);
-    const [error, setError] = useState(null);
     const [formState, setFormState] = useState({
         username: "",
         password: "" 
@@ -34,7 +32,6 @@ export default function Login() {
                 body: JSON.stringify({"username": formState.username, "password": formState.password })
             });
             const json = await response.json();
-            setResponse(json);
             setToken(json.token);
             setUser(json.user);
             setLoading(false);

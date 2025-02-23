@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function TableOfContents() {
     const navigate = useNavigate();
 
-    const { setSection, setPart, setSubdivision, setFinalizeModal, finalizeModal, audit, updateAudit } = useDB();
+    const { setSection, setPart, setSubdivision, setFinalizeModal, finalizeModal, audit, updateAudit, user, setError } = useDB();
     const [partIOpen, setPartIOpen] = useState(false);
     const [partIVOpen, setPartIVOpen] = useState(false);
     const [opOpen, setOpOpen] = useState(false);
@@ -17,7 +17,13 @@ export default function TableOfContents() {
     const togglePartIV = () => setPartIVOpen(!partIVOpen);
     const toggleOp = () => setOpOpen(!opOpen);
     const toggleGet = () => setGetOpen(!getOpen);
-    const toggleFinal = () => setFinalizeModal(!finalizeModal);
+    const toggleFinal = () => {
+        if (user.admin) {
+            setFinalizeModal(!finalizeModal);
+        } else {
+            setError('You are not authorized');
+        }
+    }
 
     const handleFinalize = () => {
         const finalAudit = cloneDeep(audit);
@@ -92,6 +98,7 @@ export default function TableOfContents() {
         setSection('Guest Experience');
         setSubdivision(e.target.textContent);
     }
+
 
     return (
         <div className='contents col-3 card'>
