@@ -584,7 +584,26 @@ export function DBProvider({ children }){
             const json = await response.json();
             console.log(json);
         } catch (error) {
-            setError(error);
+            setError(error.message);
+        }
+    }
+
+    async function updatePic(photo) {
+        console.log(JSON.stringify(photo));
+        try{
+            const response = await fetch(`${URL}/photos`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body: photo
+            });
+            const json = await response.json();
+            return (
+                json._id
+            )
+        } catch(error) {
+            setError(error.message);
         }
     }
 
@@ -607,7 +626,8 @@ export function DBProvider({ children }){
         finalizeModal,
         setFinalizeModal,
         error,
-        setError
+        setError,
+        updatePic
     }
     return(
         <dbContext.Provider value={value}>

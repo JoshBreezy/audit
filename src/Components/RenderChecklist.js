@@ -14,7 +14,7 @@ const videoConstraints = {
 
 export default function RenderChecklist(props) {
 
-    const { section, part, subdivision, audit, setAudit, updateAudit } = useDB();
+    const { section, part, subdivision, audit, setAudit, updateAudit, updatePic } = useDB();
     const webcamRef = useRef(null);
     const [modal, setModal] = useState(false);
     const [camera, setCamera] = useState(false);
@@ -88,8 +88,9 @@ export default function RenderChecklist(props) {
 
     function capture() {
             const imageSrc = webcamRef.current.getScreenshot();
+            const picID = updatePic(imageSrc);
             const updatedCheck = props.props.map((item, index) =>
-                position === index ? { ...item, photo: imageSrc } : item
+                position === index ? { ...item, photo: picID } : item
             );
             const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
