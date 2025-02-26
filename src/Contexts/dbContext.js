@@ -589,18 +589,17 @@ export function DBProvider({ children }){
     }
 
     async function updatePic(photo) {
-        console.log(JSON.stringify(photo));
+        const packet = JSON.stringify({pic : photo});
         try{
             const response = await fetch(`${URL}/photos`, {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json'
                 },
-                body: photo
+                body: packet
             });
-            const json = await response.json();
             return (
-                json._id
+                response
             )
         } catch(error) {
             setError(error.message);

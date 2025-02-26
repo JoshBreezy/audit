@@ -88,7 +88,8 @@ export default function RenderChecklist(props) {
 
     function capture() {
             const imageSrc = webcamRef.current.getScreenshot();
-            const picID = updatePic(imageSrc);
+            const picID = () => updatePic(imageSrc);
+            console.log(picID);
             const updatedCheck = props.props.map((item, index) =>
                 position === index ? { ...item, photo: picID } : item
             );
