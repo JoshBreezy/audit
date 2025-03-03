@@ -14,7 +14,7 @@ const videoConstraints = {
 
 export default function RenderChecklist(props) {
 
-    const { section, part, subdivision, audit, setAudit, updateAudit, updatePic } = useDB();
+    const { section, part, subdivision, audit, setAudit, updateAudit, updatePic, pullPic } = useDB();
     const webcamRef = useRef(null);
     const [modal, setModal] = useState(false);
     const [camera, setCamera] = useState(false);
@@ -81,24 +81,26 @@ export default function RenderChecklist(props) {
         setDedText(event.target.value);
     }
 
-    const displayPhoto = (index) => {
-        setPic(audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist[index].photo);
+    async function displayPhoto (picID){
+        const photo = await pullPic(picID);
+        setPic(photo);
         togglePic();
     }
+    
 
-    function capture() {
-            const imageSrc = webcamRef.current.getScreenshot();
-            const picID = () => updatePic(imageSrc);
-            console.log(picID);
+    async function capture() {
+            const imageSrc = webcamRef.current.getScreenshot()
+            const picID = await updatePic(imageSrc)
+            console.log(picID)
             const updatedCheck = props.props.map((item, index) =>
                 position === index ? { ...item, photo: picID } : item
-            );
-            const updatedAudit = cloneDeep(audit);
-            updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
-            setAudit(updatedAudit);
-            updateAudit(updatedAudit);
-            setCamera(false);
-            setPosition(null);
+            )
+            const updatedAudit = cloneDeep(audit)
+            updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck
+            setAudit(updatedAudit)
+            updateAudit(updatedAudit)
+            setCamera(false)
+            setPosition(null)
         }
 
     return (
@@ -149,7 +151,7 @@ export default function RenderChecklist(props) {
                         <Label check for={item.text} className='col-8'>
                             {item.text}
                         </Label>
-                        {item.photo && <FontAwesomeIcon icon={faImage} onClick={() => displayPhoto(index)} />}
+                        {item.photo && <FontAwesomeIcon icon={faImage} onClick={() => displayPhoto(item.photo)} />}
                     </FormGroup>
                 )
             })}

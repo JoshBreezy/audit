@@ -598,11 +598,25 @@ export function DBProvider({ children }){
                 },
                 body: packet
             });
+            const json = await response.json()
             return (
-                response
+                json
             )
         } catch(error) {
             setError(error.message);
+        }
+    }
+
+    async function pullPic(picID){
+        try{
+            const response = await fetch(`${URL}/photos/${picID}`, {
+                method: 'GET',
+                headers: {'Content-Type' : 'application/json'}
+            })
+            const json = await response.json()
+            return (json.pic);
+        } catch(error) {
+            setError(error)
         }
     }
 
@@ -626,7 +640,8 @@ export function DBProvider({ children }){
         setFinalizeModal,
         error,
         setError,
-        updatePic
+        updatePic,
+        pullPic
     }
     return(
         <dbContext.Provider value={value}>
