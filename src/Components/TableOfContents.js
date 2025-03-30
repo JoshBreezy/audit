@@ -59,8 +59,9 @@ export default function TableOfContents() {
 
 
     const handleQual = (e) => {
-        setPart(e.target.textContent);
+        setPart('Food Audit');
         setSection('Quality Control');
+        setSubdivision(e.target.textContent);
     }
 
     const handleOpBar = (e) => {
@@ -134,11 +135,9 @@ export default function TableOfContents() {
                     </Dropdown>
                 </ul>
                 <li>Quality Control</li>
-                <ul>
-                    <li onClick={handleQual}>Part I: Food Audit</li>
-                    <li onClick={handleQual}>Part II: Focused Menu Items</li>
-                    <li onClick={handleQual}>Part III: Attention to Detail</li>
-                </ul>
+                <Button className='col-12 mb-2' onClick={handleQual}>Food Audit</Button>
+                <Button className='col-12 mb-2' onClick={handleQual}>Focused Menu Items</Button>
+                <Button className='col-12 mb-2' onClick={handleQual}>Attention To Detail</Button>
                 <li>Guest Experience</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={getOpen} toggle={toggleGet}>

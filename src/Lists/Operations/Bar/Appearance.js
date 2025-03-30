@@ -1,6 +1,6 @@
 const appearance = [
     {
-        text:'clean and proper uniform aire is worn by all Bartenders and Barbacks',
+        text:'clean and proper uniform atire is worn by all Bartenders and Barbacks',
         value: 1,
         check: false
     },

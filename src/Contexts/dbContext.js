@@ -184,17 +184,35 @@ export function DBProvider({ children }){
                     parts: [
                         {
                             name: "Part I: Food Audit",
-                            subdivisions: [],
+                            subdivisions: [
+                                {
+                                    name: "Food Audit",
+                                    checklist: null,
+                                    score: null
+                                }
+                            ],
                             score: null
                         },
                         {
                             name: "Part II: Focused Menu Items",
-                            subdivisions: [],
+                            subdivisions: [
+                                {
+                                    name: "Focused Menu Items",
+                                    checklist: null,
+                                    score: null
+                                }
+                            ],
                             score: null
                         },
                         {
                             name: "Part III: Attention to detail",
-                            subdivisions: [],
+                            subdivisions: [
+                                {
+                                    name: "Attention to Detail",
+                                    checklist: null,
+                                    score: null
+                                }
+                            ],
                             score: null
                         }
                     ],
@@ -439,17 +457,35 @@ export function DBProvider({ children }){
                 parts: [
                     {
                         name: "Part I: Food Audit",
-                        subdivisions: [],
+                        subdivisions: [
+                            {
+                                name: "Food Audit",
+                                checklist: null,
+                                score: null
+                            }
+                        ],
                         score: null
                     },
                     {
                         name: "Part II: Focused Menu Items",
-                        subdivisions: [],
+                        subdivisions: [
+                            {
+                                name: "Focused Menu Items",
+                                checklist: null,
+                                score: null
+                            }
+                        ],
                         score: null
                     },
                     {
                         name: "Part III: Attention to detail",
-                        subdivisions: [],
+                        subdivisions: [
+                            {
+                                name: "Attention to Detail",
+                                checklist: null,
+                                score: null
+                            }
+                        ],
                         score: null
                     }
                 ],
