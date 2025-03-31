@@ -38,7 +38,7 @@ export default function RenderAudit () {
                                     {(section === 'Operations' && part === 'Kitchen') && <KitchDrop props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} /> }
                                     {section === 'Team Training & Development' && <RenderTD props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} /> }
                                     {(section === 'Environment' && subdivision === 'Walk-Through') && <RenderWalk props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist} />}
-                                    {(section === 'Quality Control' && subdivision === 'Food Audit') && <RenderFoodAudit />}
+                                    {(section === 'Quality Control' && subdivision === 'Food Audit') && <RenderFoodAudit props={audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision)} />}
                                 </Form>
                             </CardBody>
                         </Card>

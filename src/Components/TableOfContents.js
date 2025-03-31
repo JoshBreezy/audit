@@ -59,7 +59,7 @@ export default function TableOfContents() {
 
 
     const handleQual = (e) => {
-        setPart('Food Audit');
+        setPart('Part I: Food Audit');
         setSection('Quality Control');
         setSubdivision(e.target.textContent);
     }

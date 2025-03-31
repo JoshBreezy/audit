@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { useDB } from '../Contexts/dbContext';
 import { Container, Button, Card, CardBody, CardHeader, Form, FormGroup } from 'reactstrap';
 import Webcam from "react-webcam";
+import cloneDeep from 'lodash/cloneDeep';
 
 const videoConstraints = {
     width: 540,
@@ -11,12 +12,12 @@ const videoConstraints = {
 
 
 
-export default function RenderFoodAudit() {
+export default function RenderFoodAudit(props) {
     const { section, part, subdivision, audit, setAudit, updateAudit, updatePic } = useDB();
     const webcamRef = useRef(null);
     const [input, setInput] = useState();
-    const [checklist, setChecklist] = useState([]);
-    const [picList, setPicList] = useState([]);
+    const [checklist, setChecklist] = useState(props.props.checklist);
+    const [picList, setPicList] = useState(props.props.picList);
 
     async function capture() {
         const imageSrc = webcamRef.current.getScreenshot()
@@ -24,6 +25,10 @@ export default function RenderFoodAudit() {
         const newPicList = picList;
         newPicList.push(picID);
         setPicList(newPicList);
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).picList = newPicList;
+        setAudit(updatedAudit);
+        updateAudit(updatedAudit);
     }
 
     const handleText = (event) => {
@@ -31,9 +36,14 @@ export default function RenderFoodAudit() {
     }
 
     const handleDed = () => {
-        const newChecklist = checklist;
-        newChecklist.push(input);
-        setChecklist(newChecklist);
+        const updatedCheck = checklist;
+        updatedCheck.push(input);
+        setChecklist(updatedCheck);
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        setAudit(updatedAudit);
+        updateAudit(updatedAudit);
+        setInput(null);
     }
         
         
@@ -59,7 +69,7 @@ export default function RenderFoodAudit() {
             <Card className='mt-3'>
                 <CardHeader>Add a comment here for an unforced error</CardHeader>
                 <CardBody>
-                    <Form>
+                    <Form onSubmit={(event) => event.preventDefault()}>
                         <FormGroup className='d-flex justify-content-between'>
                             <input className='col-9' type='text' id='deduction' onChange={handleText} />
                             <Button className='col-2' color='danger' onClick={handleDed} >Submit</Button>
@@ -67,8 +77,8 @@ export default function RenderFoodAudit() {
                     </Form>
                 </CardBody>
             </Card>
-            <Container className='d-flex justify-content-start mt-4'>
-                <h4>{checklist.length}/</h4>
+            <Container className='d-flex justify-content-between mt-4 align-items-center'>
+                <h4>{checklist.length + ' Unforced Errors / ' + picList.length + ' Total Food Items'}</h4><h4>{picList.length / checklist.length}%</h4>
             </Container>
         </div>
     )

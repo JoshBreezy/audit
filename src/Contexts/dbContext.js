@@ -187,7 +187,8 @@ export function DBProvider({ children }){
                             subdivisions: [
                                 {
                                     name: "Food Audit",
-                                    checklist: null,
+                                    checklist: [],
+                                    picList: [],
                                     score: null
                                 }
                             ],
@@ -460,7 +461,8 @@ export function DBProvider({ children }){
                         subdivisions: [
                             {
                                 name: "Food Audit",
-                                checklist: null,
+                                checklist: [],
+                                picList: [],
                                 score: null
                             }
                         ],
