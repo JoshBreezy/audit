@@ -27,6 +27,7 @@ import BarTD from '../Lists/TeamT&D/BarTD';
 import KitchenTD from '../Lists/TeamT&D/KitchenTD';
 import DiningGet from '../Lists/GuestExperience/DiningGET';
 import BarGet from '../Lists/GuestExperience/BarGET';
+import FocusedItems from '../Lists/Quality Control/FocusedItems';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';
@@ -199,7 +200,7 @@ export function DBProvider({ children }){
                             subdivisions: [
                                 {
                                     name: "Focused Menu Items",
-                                    checklist: null,
+                                    checklist: FocusedItems,
                                     score: null
                                 }
                             ],
@@ -470,14 +471,14 @@ export function DBProvider({ children }){
                     },
                     {
                         name: "Part II: Focused Menu Items",
-                        subdivisions: [
-                            {
-                                name: "Focused Menu Items",
-                                checklist: null,
-                                score: null
-                            }
-                        ],
-                        score: null
+                            subdivisions: [
+                                {
+                                    name: "Focused Menu Items",
+                                    checklist: FocusedItems,
+                                    score: null
+                                }
+                            ],
+                            score: null
                     },
                     {
                         name: "Part III: Attention to detail",

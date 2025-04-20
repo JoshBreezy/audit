@@ -125,7 +125,7 @@ const cookingLine = [
         value: 1
     },
     {
-        text: "no evidence of pest ac>vity (10 points)",
+        text: "no evidence of pest activity (10 points)",
         check: false,
         value: 10
     }

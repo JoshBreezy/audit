@@ -58,8 +58,20 @@ export default function TableOfContents() {
     }
 
 
-    const handleQual = (e) => {
+    const handleQualP1 = (e) => {
         setPart('Part I: Food Audit');
+        setSection('Quality Control');
+        setSubdivision(e.target.textContent);
+    }
+
+    const handleQualP2 = (e) => {
+        setPart('Part II: Focused Menu Items');
+        setSection('Quality Control');
+        setSubdivision(e.target.textContent);
+    }
+
+    const handleQualP3 = (e) => {
+        setPart('Part III: Attention To Detail');
         setSection('Quality Control');
         setSubdivision(e.target.textContent);
     }
@@ -135,9 +147,9 @@ export default function TableOfContents() {
                     </Dropdown>
                 </ul>
                 <li>Quality Control</li>
-                <Button className='col-12 mb-2' onClick={handleQual}>Food Audit</Button>
-                <Button className='col-12 mb-2' onClick={handleQual}>Focused Menu Items</Button>
-                <Button className='col-12 mb-2' onClick={handleQual}>Attention To Detail</Button>
+                <Button className='col-12 mb-2' onClick={handleQualP1}>Food Audit</Button>
+                <Button className='col-12 mb-2' onClick={handleQualP2}>Focused Menu Items</Button>
+                <Button className='col-12 mb-2' onClick={handleQualP3}>Attention To Detail</Button>
                 <li>Guest Experience</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={getOpen} toggle={toggleGet}>

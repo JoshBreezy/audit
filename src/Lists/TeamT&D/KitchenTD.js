@@ -6,7 +6,7 @@ const kitchenTD = [
         ]
     },
     {
-        scaleText: 'Team Training & Development Part III: Kitchen (40 points)',
+        scaleText: 'Team Training & Development Part III: Kitchen (50 points)',
         value: 0
     }
 ]

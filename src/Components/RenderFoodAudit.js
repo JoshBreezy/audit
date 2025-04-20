@@ -71,14 +71,14 @@ export default function RenderFoodAudit(props) {
                 <CardBody>
                     <Form onSubmit={(event) => event.preventDefault()}>
                         <FormGroup className='d-flex justify-content-between'>
-                            <input className='col-9' type='text' id='deduction' onChange={handleText} />
+                            <input className='col-9' type='text' id='deduction' placeholder='example: sloppy plating' onChange={handleText} />
                             <Button className='col-2' color='danger' onClick={handleDed} >Submit</Button>
                         </FormGroup>
                     </Form>
                 </CardBody>
             </Card>
             <Container className='d-flex justify-content-between mt-4 align-items-center'>
-                <h4>{checklist.length + ' Unforced Errors / ' + picList.length + ' Total Food Items'}</h4><h4>{picList.length / checklist.length}%</h4>
+                <h4>{checklist.length + ' Unforced Error(s) / ' + picList.length + ' Total Food Item(s)'}</h4><h4>{100 - Math.round((checklist.length / picList.length) * 100)}%</h4>
             </Container>
         </div>
     )
