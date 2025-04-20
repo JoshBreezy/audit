@@ -1,10 +1,21 @@
 import { useState } from 'react';
 import { useDB } from '../Contexts/dbContext';
-import { Container, Table } from 'reactstrap';
+import { Container, Table, FormGroup, Input } from 'reactstrap';
+import cloneDeep from 'lodash/cloneDeep';
 
-export default function RenderFocused (props) {
+export default function RenderFocused(props) {
 
-    const { setAudit, updateAudit } = useDB();
+    const { setAudit, updateAudit, audit, section, part, subdivision } = useDB();
+
+    function handleCheck(position) {
+        const updatedCheck = props.props.map((item, index) =>
+            position === index ? { ...item, check: !item.check } : item
+        );
+        const updatedAudit = cloneDeep(audit);
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        setAudit(updatedAudit);
+        updateAudit(updatedAudit);
+    }
 
     return (
         <div className='mt-4'>
@@ -19,7 +30,25 @@ export default function RenderFocused (props) {
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        {props.props.map((item, index) => {
+                            return (
+                                <tr key={index}>
+                                    <th scope='row'>
+                                        {item.item}
+                                    </th>
+                                    <td>
+                                        {item.standard}
+                                    </td>
+                                    <td>
+                                        <input 
+                                            type='checkbox'
+                                            name={item.item}
+                                            checked={item.check}
+                                            onChange={() => handleCheck(index)} />
+                                    </td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </Table>
             </Container>
