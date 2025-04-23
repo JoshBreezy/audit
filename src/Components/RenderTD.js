@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export default function RenderTD(props) {
 
-    const { audit, setAudit, section, part, subdivision } = useDB();
+    const { audit, setAudit, section, part, subdivision, updateAudit } = useDB();
     const [values, SetValues] = useState();
 
     const handleTextInput = (selectedValue, index) => {
@@ -19,6 +19,7 @@ export default function RenderTD(props) {
         const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = values;
             setAudit(updatedAudit);
+            updateAudit(updatedAudit);
     }
 
 

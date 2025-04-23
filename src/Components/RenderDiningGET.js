@@ -5,7 +5,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 export default function RenderDiningGet(props) {
 
-    const { audit, setAudit, section, subdivision, part } = useDB();
+    const { audit, setAudit, section, subdivision, part, updateAudit } = useDB();
 
     const [getValues, setGetValues] = useState(props.props)
 
@@ -28,6 +28,7 @@ export default function RenderDiningGet(props) {
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = getValues;
         setAudit(updatedAudit);
+        updateAudit(updatedAudit);
     }
 
 

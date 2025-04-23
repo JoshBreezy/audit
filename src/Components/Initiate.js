@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Initiate () {
     const [locations, setLocations] = useState();
-    const { defaultAudit, setAudit, URL, token, user } = useDB();
+    const { defaultAudit, setAudit, URL, token, user, updateAudit } = useDB();
     const [active, setActive] = useState();
     const [startEnable, setStartEnable] = useState(true);
     const navigate= useNavigate();
@@ -44,6 +44,7 @@ export default function Initiate () {
             const json = await response.json();
             const updatedAudit = {...defaultAudit, _id: json._id, location: active.location, author: user.username, authorID : user._id};
             setAudit(updatedAudit);
+            updateAudit(updatedAudit);
             navigate('/auditstart');
         } catch (error) {
             console.log(error)

@@ -29,7 +29,7 @@ function App() {
     <div className="App">
       <Container>
         <Row>
-            <Card className='col-12'>
+            <Card className='col-9'>
               <CardBody>
                 <CardTitle tag="h1">
                   Audit

@@ -1,9 +1,9 @@
 import { useDB } from '../Contexts/dbContext';
 import { FormGroup, Input, Label} from 'reactstrap';
-import { cloneDeep } from 'lodash/cloneDeep';
+import cloneDeep from 'lodash/cloneDeep';
 
 export default function KitchDrop (props) {
-    const { audit, section, part, subdivision, setAudit } = useDB();
+    const { audit, section, part, subdivision, setAudit, updateAudit } = useDB();
 
 
     const handleDropVal = (selectedValue, index) => {
@@ -13,6 +13,7 @@ export default function KitchDrop (props) {
             const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
             setAudit(updatedAudit);
+            updateAudit(updatedAudit);
         }
 
 
