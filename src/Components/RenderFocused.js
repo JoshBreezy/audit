@@ -1,11 +1,21 @@
-import { useState } from 'react';
 import { useDB } from '../Contexts/dbContext';
-import { Container, Table, FormGroup, Input } from 'reactstrap';
+import { Container, Table } from 'reactstrap';
 import cloneDeep from 'lodash/cloneDeep';
 
 export default function RenderFocused(props) {
 
     const { setAudit, updateAudit, audit, section, part, subdivision } = useDB();
+    
+    function checked(){
+        let count = 0;
+        props.props.map((item) => {
+            if(item.check) {
+                count += 1;
+            }
+        })
+        return count;
+    }
+
 
     function handleCheck(position) {
         const updatedCheck = props.props.map((item, index) =>
@@ -51,6 +61,10 @@ export default function RenderFocused(props) {
                         })}
                     </tbody>
                 </Table>
+            </Container>
+            <Container className='d-flex justify-content-between mt-4 align-items-center'>
+                <h4>Quality Control Part II: Focused Menu Items (10 points)</h4>
+                <h4>{checked()} / 10</h4><h4> {checked() / 10 * 100}%</h4>
             </Container>
         </div>
     )
