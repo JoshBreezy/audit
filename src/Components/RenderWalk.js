@@ -4,7 +4,7 @@ import { cloneDeep } from 'lodash';
 
 export default function RenderWalk(props) {
 
-    const { audit, setAudit, section, subdivision, part } = useDB();
+    const { audit, setAudit, section, subdivision, part, updateAudit } = useDB();
 
     function handleCheck(position) {
         const updatedCheck = props.props.map((item, index) =>
@@ -13,6 +13,7 @@ export default function RenderWalk(props) {
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
         setAudit(updatedAudit);
+        updateAudit(updatedAudit)
     }
 
     return (

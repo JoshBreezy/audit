@@ -27,8 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <Container>
-        <Row>
+      <Row className='d-flex'>
             <Card className='col-9'>
               <CardBody>
                 <CardTitle tag="h1">
@@ -36,8 +35,7 @@ function App() {
                 </CardTitle>
               </CardBody>
             </Card>
-        </Row>
-      </Container>
+      </Row>
       {error && <Container><Row><Alert color='danger' centered>{error}</Alert></Row></Container>}
       <Routes>
         <Route path='/' element={<Login />} />

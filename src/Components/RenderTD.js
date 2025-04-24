@@ -19,7 +19,7 @@ export default function RenderTD(props) {
         const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = values;
             setAudit(updatedAudit);
-            updateAudit(updatedAudit);
+            updateAudit(audit);
     }
 
 
@@ -27,7 +27,7 @@ export default function RenderTD(props) {
         <>
             {props.props.map((item, index) => {
                 return (
-                    <>
+                    <div key={index}>
                         <ul>
                             {item.tdText && item.tdText.map((thing) => {
                                 return (
@@ -46,9 +46,9 @@ export default function RenderTD(props) {
                                 defaultValue={item.value}
                                 onChange={(e) => handleTextInput(e.target.value, index)}
                             />
-                        </FormGroup>
+                            </FormGroup>
                         }
-                    </>
+                    </div>
                 )
             })}
             <p className='mt-2'>10 points per Team Member - training must be fully complete, reviewed, and acceptably graded for a pass to achieve full points – no partial scoring</p>
