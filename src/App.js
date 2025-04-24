@@ -1,14 +1,13 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Card, CardTitle, CardBody, Row, Container, Modal, ModalBody, Alert } from 'reactstrap';
+import {Card, CardTitle, CardBody, Row, Container, Alert } from 'reactstrap';
 import {Routes, Route} from 'react-router-dom';
 import { useDB } from './Contexts/dbContext';
 import { useEffect } from 'react';
 import Landing from './Components/Landing';
 import RenderAudit from './Components/RenderAudit';
 import Initiate from './Components/Initiate';
-import ViewPreviousAudit from './Components/ViewPreviousAudit';
-import VenturaQ3 from './Components/VenturaQ3';
+import FinishedList from './Components/FinishedList';
 import CreateUser from './Components/CreateUser';
 import Login from './Components/Login';
 import UnfinishedList from './Components/UnfinishedList';
@@ -44,8 +43,7 @@ function App() {
         <Route path='/initiate' element={<Initiate />} />
         <Route path='/auditstart' element={<RenderAudit />} />
         <Route path='/selectUnfinished' element={<UnfinishedList />} />
-        <Route path='/viewprev' element={<ViewPreviousAudit />} />
-        <Route path='/viewprev/VenturaQ3' element={<VenturaQ3 />} />
+        <Route path='/viewprev' element={<FinishedList />} />
       </Routes>
     </div>
   );

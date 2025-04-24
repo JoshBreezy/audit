@@ -18,7 +18,7 @@ export default function Landing () {
         </Container>
         <Container>
           <Row className='pt-4'>
-            <div className='col-11 d-flex justify-content-center'><Link to='/viewprev' className='btn btn-primary btn-lg'>View Previous Audits</Link></div>
+            <div className='col-11 d-flex justify-content-center'><Link to='/viewprev' className='btn btn-primary btn-lg'>View Completed Audits</Link></div>
           </Row>
         </Container>
         <Container>
