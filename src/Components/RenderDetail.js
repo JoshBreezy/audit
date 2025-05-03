@@ -16,6 +16,16 @@ export default function RenderDetail(props) {
         return count;
     }
 
+    function score(list){
+        let count = 0;
+        list.map((item) => {
+            if(item.check) {
+                count += 1;
+            }
+        })
+        return (count);
+    }
+
 
     function handleCheck(position) {
         const updatedCheck = props.props.map((item, index) =>
@@ -23,6 +33,7 @@ export default function RenderDetail(props) {
         );
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = score(updatedCheck);
         setAudit(updatedAudit);
         updateAudit(updatedAudit);
     }

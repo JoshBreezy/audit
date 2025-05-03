@@ -26,7 +26,9 @@ export default function RenderFoodAudit(props) {
         newPicList.push(picID);
         setPicList(newPicList);
         const updatedAudit = cloneDeep(audit);
+        const score = 100 - Math.round((checklist.length / picList.length) * 100);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).picList = newPicList;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = score;
         setAudit(updatedAudit);
         updateAudit(updatedAudit);
     }
@@ -35,12 +37,15 @@ export default function RenderFoodAudit(props) {
          setInput(event.target.value);
     }
 
+
     const handleDed = () => {
         const updatedCheck = checklist;
         updatedCheck.push(input);
         setChecklist(updatedCheck);
         const updatedAudit = cloneDeep(audit);
+        const score = 100 - Math.round((checklist.length / picList.length) * 100);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = score;
         setAudit(updatedAudit);
         updateAudit(updatedAudit);
         setInput(null);

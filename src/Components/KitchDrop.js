@@ -5,6 +5,16 @@ import cloneDeep from 'lodash/cloneDeep';
 export default function KitchDrop (props) {
     const { audit, section, part, subdivision, setAudit, updateAudit } = useDB();
 
+    function score(list) {
+        let count = 0;
+        list.map((item) => {
+            if (item.value) {
+                count += item.value;
+            }
+        })
+        return count;
+    }
+
 
     const handleDropVal = (selectedValue, index) => {
             const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, idx) =>
@@ -12,6 +22,7 @@ export default function KitchDrop (props) {
             );
             const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+            updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = score(updatedCheck);
             setAudit(updatedAudit);
             updateAudit(updatedAudit);
         }

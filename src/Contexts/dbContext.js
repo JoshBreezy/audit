@@ -28,7 +28,7 @@ import KitchenTD from '../Lists/TeamT&D/KitchenTD';
 import DiningGet from '../Lists/GuestExperience/DiningGET';
 import BarGet from '../Lists/GuestExperience/BarGET';
 import FocusedItems from '../Lists/Quality Control/FocusedItems';
-import AttentionToDetail from '../Lists/Quality Control/AttentionToDetail'
+import AttentionToDetail from '../Lists/Quality Control/AttentionToDetail';
 
 
 const URL = 'https://finneys-audit-04f13bd12b34.herokuapp.com';

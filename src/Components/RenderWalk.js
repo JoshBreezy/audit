@@ -6,12 +6,23 @@ export default function RenderWalk(props) {
 
     const { audit, setAudit, section, subdivision, part, updateAudit } = useDB();
 
+    function handleScore(list) {
+        let count = 0;
+        list.map((item) => {
+            if(item.check){
+                count += item.value;
+            }
+        })
+        return count;
+    }
+
     function handleCheck(position) {
         const updatedCheck = props.props.map((item, index) =>
             position === index ? { ...item, check: !item.check } : item
         );
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = handleScore(updatedCheck);
         setAudit(updatedAudit);
         updateAudit(updatedAudit)
     }

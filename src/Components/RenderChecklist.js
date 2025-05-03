@@ -27,6 +27,15 @@ export default function RenderChecklist(props) {
     const toggleReq = () => setModal(!modal);
     const togglePic = () => setPicModal(!picModal);
 
+    function handleScore(list) {
+        let count = 0;
+        list.map((item) => {
+            if(item.check){
+                count += item.value;
+            }
+        })
+        return count;
+    }
 
     function handleCheck(position) {
         const updatedCheck = props.props.map((item, index) =>
@@ -39,6 +48,7 @@ export default function RenderChecklist(props) {
         updatedCheck[position].check && toggleReq();
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = handleScore(updatedCheck);
         setAudit(updatedAudit);
         updateAudit(updatedAudit);
     }
@@ -157,7 +167,7 @@ export default function RenderChecklist(props) {
             })}
             <Button color='danger' className='btn mt-2' onClick={handleAddDed} >Additional Deduction</Button>
             <Button color='danger' className='btn mt-2 ms-4' onClick={removePrevDed}>Undo Previous Additional Deduction</Button>
-        </>
+        </> 
     )
 
 

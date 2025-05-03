@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function FinishedList () {
 
-    const { audit, URL, token, setAudit } = useDB();
+    const { URL, token, setAudit } = useDB();
     const [auditList, setAuditList] = useState();
 
     const navigate = useNavigate();

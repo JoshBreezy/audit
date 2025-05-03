@@ -6,7 +6,17 @@ export default function RenderFocused(props) {
 
     const { setAudit, updateAudit, audit, section, part, subdivision } = useDB();
     
-    function checked(){
+    function score(list){
+        let count = 0;
+        list.map((item) => {
+            if(item.check) {
+                count += 1;
+            }
+        })
+        return (count);
+    }
+
+    function checked() {
         let count = 0;
         props.props.map((item) => {
             if(item.check) {
@@ -23,6 +33,7 @@ export default function RenderFocused(props) {
         );
         const updatedAudit = cloneDeep(audit);
         updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = updatedCheck;
+        updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = score(updatedCheck)
         setAudit(updatedAudit);
         updateAudit(updatedAudit);
     }

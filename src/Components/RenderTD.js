@@ -7,19 +7,22 @@ export default function RenderTD(props) {
 
     const { audit, setAudit, section, part, subdivision, updateAudit } = useDB();
     const [values, SetValues] = useState();
+    const [score, setScore] = useState();
 
     const handleTextInput = (selectedValue, index) => {
         const updatedCheck = audit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist.map((item, idx) =>
             idx === index ? { ...item, value: parseInt(selectedValue, 10) } : item
         );
+        setScore(parseInt(selectedValue, 10));
         SetValues(updatedCheck);
     }
 
     const handleSubmit = () => {
         const updatedAudit = cloneDeep(audit);
             updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).checklist = values;
+            updatedAudit.sections.find(sec => sec.name === section).parts.find(prt => prt.name === part).subdivisions.find(sub => sub.name === subdivision).score = score;
             setAudit(updatedAudit);
-            updateAudit(audit);
+            updateAudit(updatedAudit);
     }
 
 
