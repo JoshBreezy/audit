@@ -26,16 +26,6 @@ function App() {
 
   return (
     <div className="App">
-      <Row className='d-flex'>
-            <Card className='col-9'>
-              <CardBody>
-                <CardTitle tag="h1">
-                  Audit
-                </CardTitle>
-              </CardBody>
-            </Card>
-      </Row>
-      {error && <Container><Row><Alert color='danger' centered>{error}</Alert></Row></Container>}
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/signup' element={<CreateUser />} />
@@ -45,6 +35,7 @@ function App() {
         <Route path='/selectUnfinished' element={<UnfinishedList />} />
         <Route path='/viewprev' element={<FinishedList />} />
       </Routes>
+      {error && <Container><Row><Alert color='danger' centered>{error}</Alert></Row></Container>}
     </div>
   );
 }

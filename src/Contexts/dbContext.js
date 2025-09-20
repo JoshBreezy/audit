@@ -59,6 +59,8 @@ export function DBProvider({ children }){
         localStorage.setItem('user', JSON.stringify(newUser));
     }
 
+    const [enableInput, setEnableInput] = useState(false);
+
     const[audit, setAudit] = useState(
         {
             _id: null,
@@ -681,7 +683,9 @@ export function DBProvider({ children }){
         error,
         setError,
         updatePic,
-        pullPic
+        pullPic,
+        enableInput,
+        setEnableInput
     }
     return(
         <dbContext.Provider value={value}>

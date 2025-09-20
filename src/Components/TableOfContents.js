@@ -33,6 +33,19 @@ export default function TableOfContents() {
         navigate('/landing');
     }
 
+    const handleReopen = () => {
+        const finalAudit = cloneDeep(audit);
+        finalAudit.finalized = false;
+        updateAudit(finalAudit);
+        navigate('/selectUnfinished');
+    }
+
+    const handleFrontPage = (e) => {
+        setPart('Scores');
+        setSection('Total Section Scores');
+        setSubdivision();
+    }
+
     const handleEnvP1 = (e) => {
         setPart('Part I: Front of House');
         setSection('Environment');
@@ -116,6 +129,7 @@ export default function TableOfContents() {
     return (
         <div className='contents col-3 card'>
             <ul>
+                <Button className='col-12 mb-2' onClick={handleFrontPage}>Front Page</Button>
                 <li>Environment</li>
                 <ul className='p-0'>
                     <Dropdown isOpen={partIOpen} toggle={togglePartI}>
@@ -188,7 +202,8 @@ export default function TableOfContents() {
                     <Button className='col col-5 m-3' color='primary' onClick={toggleFinal} >Cancel</Button>
                 </ModalBody>
             </Modal>
-            <Button className='col-11 align-self-end mb-2' color='danger' onClick={toggleFinal} >Finalize</Button>
+            {user.admin && !audit.finalized && <Button className='col-11 align-self-end mb-2' color='danger' onClick={toggleFinal} >Finalize</Button>}
+            {user.admin && audit.finalized && <Button className='col-11 align-self-end mb-2' color='danger' onClick={handleReopen} >Reopen</Button>}
         </div>
     )
 }
